@@ -19,7 +19,6 @@
                 <span class="navbar-brand">Add New Employee</span>
                 <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"> 
                 </div>
-            <?php include("employeeNaviBar.php");  ?><br>
                 <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto"></ul>
         <?php include("navigationMenu.php");  ?><br>
