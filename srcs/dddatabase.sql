@@ -2,7 +2,7 @@ CREATE database if not exists dddatabase;
 
 use dddatabase;
 /*==================== logs - employee - payroll =================== */
-/* table 1*/ 
+/* table 1*/
 CREATE TABLE if not exists employee (
 	employee_id     int,
 	first_name      varchar(20) NOT NULL,
@@ -23,8 +23,9 @@ CREATE TABLE if not exists employee (
 /* table 2 */
 CREATE TABLE if NOT EXISTS payroll (
 	employee_id     int,
-  pay_date        date NOT NULL UNIQUE, 
-	paycheck_amount	numeric(9,2) NOT NULL  
+  pay_date        date NOT NULL UNIQUE,
+	paycheck_amount	numeric(9,2) NOT NULL,
+	foreign key (employee_id) references employee(employee_id)
 );
 
 /* table 3 */
@@ -88,5 +89,7 @@ CREATE TABLE if not exists orders(
   product_id    int,
   timestamp     datetime,
   quantity      int,
-  primary key (customer_id, product_id, timestamp)
+  primary key (customer_id, product_id, timestamp),
+	foreign key (customer_id) references customer(customer_id),
+	foreign key (product_id) references items(product_id)
 );
