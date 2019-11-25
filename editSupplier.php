@@ -43,6 +43,7 @@
         $_SESSION['msg_type'] = "success";
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -50,14 +51,13 @@
 		<title>Edit Employees</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
-	<body>
-        <div>
+    <div>
         <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
             <span class="navbar-brand">Edit Supplier: <?php echo $id, " - ", $name;?></span>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"></div>
-            <?php include("navigationMenu.php");  ?><br>
-        <br> 
-
+            <?php include("navigationMenu.php");  ?><br><br>
+    
+    <body>
         <div class="container">
             <form action="editSupplier.php" method="POST" >
                 <div class="form-group row">

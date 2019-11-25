@@ -63,12 +63,14 @@
 	<body>
         <div>
         <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
+            <!-- Display Select employee for editting -->
             <span class="navbar-brand">Edit Employee: <?php echo $id, " - ", $first_name, " ", $last_name;?></span>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"> 
             </div>
             <?php include("navigationMenu.php");  ?><br>
-
         <br> 
+
+        <!-- Display Add new employee form -->
         <div class="container">
             <form action="editEmployee.php" method="POST" >
                 <div class="form-group row">
@@ -126,8 +128,7 @@
                 <div  align="center">
                     <button name="update" type="submit" class="btn btn-success">Update</button>   
                     <a href="employees.php" class="btn btn-danger">Cancel</a>
-                </div>
-</b>
+                </div></b>
             </form>
         </div>
     </body>

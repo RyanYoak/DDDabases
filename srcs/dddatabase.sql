@@ -68,7 +68,7 @@ CREATE TABLE if not exists supplier (
 /* table 6 */
 CREATE TABLE if not exists items(
   product_id    int,
-  category_id   int,
+  category      varchar(50),
   unit_price    numeric(9,2) not null,
   quantity      int,
   primary key(product_id)

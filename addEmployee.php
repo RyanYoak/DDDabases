@@ -13,20 +13,15 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="style.css">
     </head>
-	<body>
-        <div>
-            <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
+    <div>
+        <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
                 <span class="navbar-brand">Add New Employee</span>
-                <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"> 
-                </div>
                 <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto"></ul>
-        <?php include("navigationMenu.php");  ?><br>
-
-        <br> 
-        <?php
-            if(isset($_SESSION['message'])):
-        ?>
+    <?php include("navigationMenu.php");  ?><br>
+            <!-- Display message after insert -->
+            <br> 
+        <?php if(isset($_SESSION['message'])):?>
         <div class="alert alert-<?=$_SESSION['msg_type']?>">
             <?php 
                 echo $_SESSION['message'];
@@ -34,13 +29,14 @@
             ?>
         </div>
         <?php endif ?>
-
+	<body>        
+        <!-- display insert form -->
         <div id="insertForm" class="container">
             <form action="addEmployee.php" method="POST">
                 <b>
                 <div class="form-group row">
                     <label class="col-sm-2">Employee ID*</label>
-                    <input id="id" name="id" type="number" class="form-control col-sm-5" placeholder="Employee ID" required>
+                    <input id="id" name="id" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Employee ID" required>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">First Name*</label>
@@ -56,7 +52,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">SSN*</label>
-                    <input id="ssn" name="ssn" type="number" class="form-control col-sm-5" placeholder="" required>
+                    <input id="ssn" name="ssn" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="" required>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Gender</label>
@@ -72,7 +68,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Phone Number*</label>
-                    <input id="phone" name="phone" type="number" class="form-control col-sm-5" placeholder="number only" required>
+                    <input id="phone" name="phone" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="number only" required>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Address*</label>

@@ -9,27 +9,27 @@
 		<title>Manage Employees</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
-	<body>
-        <div>
+    <div>
         <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
             <span class="navbar-brand">Manage Employees</span>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"> 
             </div>
-            <?php include("navigationMenu.php");  ?><br>
-        <br> 
-        <?php
-            if(isset($_SESSION['message'])):
+            <?php include("navigationMenu.php");  ?><br><br>
+            <!-- Display Message after edit, add and delete an employee -->
+    <?php if(isset($_SESSION['message'])): ?>
+    <div class="alert alert-<?=$_SESSION['msg_type']?>">
+        <?php 
+            echo $_SESSION['message'];
+            unset($_SESSION['message']);
         ?>
-        <div class="alert alert-<?=$_SESSION['msg_type']?>">
-            <?php 
-                echo $_SESSION['message'];
-                unset($_SESSION['message']);
-            ?>
-        </div>
-        <?php endif ?>
-        <br>
-
+    </div>
+        <?php endif ?><br>
+        
+    <body>
+        <!-- Display add new employee button -->
         <div class="container"><a class="btn btn-info " href="addEmployee.php?add">ADD NEW EMPLOYEE</a></div><br>
+
+        <!-- Display employee table -->
         <div class="container">
             <table id="viewTable">
                 <thead class="table table-dark">
