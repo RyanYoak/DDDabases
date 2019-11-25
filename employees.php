@@ -15,7 +15,7 @@
             <span class="navbar-brand">Manage Employees</span>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"> 
             </div>
-        <?php include("employeeNaviBar.php");  ?><br>
+            <?php include("navigationMenu.php");  ?><br>
         <br> 
         <?php
             if(isset($_SESSION['message'])):

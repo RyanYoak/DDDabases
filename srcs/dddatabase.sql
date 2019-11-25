@@ -11,7 +11,7 @@ CREATE TABLE if not exists employee (
   ssn             int,
   birthday        date NOT NULL,
   gender         	varchar(7),
-	email           varchar(20) NOT NULL,
+	email           varchar(100) NOT NULL,
 	phone           int NOT NULL,
   address         varchar(255) NOT NULL,
 	position		    varchar(50),
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS customer (
 	first_name		varchar(20) NOT NULL,
 	last_name			varchar(20) NOT NULL,
 	middle_name		varchar(20),
-	email					varchar(20) NOT NULL,
+	email					varchar(100) NOT NULL,
 	phone       	int NOT NULL,
   address 			varchar(255),
   pays          bigint,
@@ -58,7 +58,7 @@ CREATE TABLE if not exists supplier (
   name          varchar(20) NOT NULL,
   industry      varchar(20),
   phone         int NOT NULL,
-  email         varchar(50) NOT NULL,
+  email         varchar(100) NOT NULL,
   address       varchar(50) NOT NULL,
   website       varchar(255),
   primary key(supplier_id)
@@ -74,22 +74,12 @@ CREATE TABLE if not exists items(
 );
 
 /* table 7 */
-CREATE TABLE if not exists supplier (
-  supplier_id   int,
-  name          varchar(50) NOT NULL,
-  industry      varchar(20),
-  phone         int NOT NULL,
-  email         varchar(50) NOT NULL,
-  address       varchar(50) NOT NULL,
-  website       varchar(255),
-  primary key(supplier_id)
-);
-
-/* table 8 */
 CREATE TABLE IF NOT EXISTS supplies (
   product_id    int,
   supplier_id   int,
-  PRIMARY KEY (product_id, supplier_id)
+  PRIMARY KEY (product_id, supplier_id),
+  FOREIGN KEY (product_id) REFERENCES items(product_id),
+  FOREIGN KEY (supplier_id) REFERENCES supplier(supplier_id)
 );
 
 /* table 9 */
