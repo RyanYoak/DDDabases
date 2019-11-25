@@ -66,7 +66,7 @@
             <span class="navbar-brand">Edit Employee: <?php echo $id, " - ", $first_name, " ", $last_name;?></span>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"> 
             </div>
-        <?php include("employeeNaviBar.php");  ?><br>
+            <?php include("navigationMenu.php");  ?><br>
 
         <br> 
         <div class="container">

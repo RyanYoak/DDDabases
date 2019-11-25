@@ -55,7 +55,7 @@
         <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
             <span class="navbar-brand">Edit Supplier: <?php echo $id, " - ", $name;?></span>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"></div>
-        <?php include("employeeNaviBar.php");  ?><br>
+            <?php include("navigationMenu.php");  ?><br>
         <br> 
 
         <div class="container">

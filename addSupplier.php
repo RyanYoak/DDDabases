@@ -21,7 +21,7 @@
                 </div>
             <?php include("employeeNaviBar.php");  ?><br>
                 <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
-        <?php include ("employeeNaviBar.php");?>
+                <?php include("navigationMenu.php");  ?><br>
 
         <br> 
         <?php
