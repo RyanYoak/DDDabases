@@ -6,7 +6,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Orders Items</title>
+		<title>Orders</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <div>
@@ -26,6 +26,7 @@
         <?php endif ?><br>
         
     <body>
+        <div class="container"><a class="btn btn-info " href="addOrders.php?insert">ADD NEW ORDERS</a></div><br>
         <!-- codes here -->
     </body>
     <?php include("scripts.php"); ?>
