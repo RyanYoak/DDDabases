@@ -210,8 +210,31 @@
 
 	/* ============================= Customers ===============================	*/
 	function showCustomers(){
+		$sql = "SELECT * FROM customer";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			// view all employees
+			while($row = $result->fetch_assoc()) {
+				echo '<tr>';
+					echo "<td>" . $row["customer_id"]. "</td>";
+					echo "<td>" . $row["first_name"]. "</td>";
+					echo "<td>" . $row["last_name"]. "</td>";
+					echo "<td>" . $row["email"]. "</td>";
+					echo "<td>" . $row["phone"]. "</td>";
+					echo "<td>" . $row["address"]. "</td>";
+					echo "<td>" . $row["pays"]. "</td>";
+					echo "<td>";
+						echo "<a href='editEmployee.php?edit=". $row["customer_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
+						echo " <a href='employees.php?delete=". $row["customer_id"]. "' class='btn btn-danger btn-sm'>Delete</a>";
+					echo "</td>";
+				echo '</tr>';
+			}
+		}
+		else {
+					echo "0 results";
+		}
 
-	}
+}
 
 
 	/* ============================= Orders ===============================	*/
