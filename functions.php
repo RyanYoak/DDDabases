@@ -3,7 +3,7 @@
 		//$script = "$('#editForm').hide();";
 		session_start();
 	function insertEmployee($conn){
-		if (isset($_POST['insert'])){			
+		if (isset($_POST['insert'])){
 			$id = $_POST['id'];
 			$first_name = $_POST['first_name'];
 			$last_name = $_POST['last_name'];
@@ -28,15 +28,15 @@
                 die('Could not enter data: ' . mysqli_error($conn));
 			}
 			$conn->close();
-			
+
 			// display message after submit
 			$_SESSION['message'] = "Insert Record Successlly Employee ID:  $id Name:  $first_name $last_name";
 			$_SESSION['msg_type'] = "success";
 			echo "<script> setTimeout(\"location.href = 'addEmployee.php';\", 3000);</script>";
-		}	
+		}
 	}
 
-	function showEmployee($conn) {	
+	function showEmployee($conn) {
 		$sql = "SELECT * FROM employee";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
@@ -48,7 +48,7 @@
 					echo "<td>" . $row["last_name"]. "</td>";
 					echo "<td>" . $row["email"]. "</td>";
 					echo "<td>" . $row["phone"]. "</td>";
-					echo "<td>" . $row["address"]. "</td>";					
+					echo "<td>" . $row["address"]. "</td>";
 					echo "<td>" . $row["wage"]. "</td>";
 					echo "<td>";
 						echo "<a href='editEmployee.php?edit=". $row["employee_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
@@ -56,7 +56,7 @@
 					echo "</td>";
 				echo '</tr>';
 			}
-		} 
+		}
 		else {
 				echo "0 results";
 		}
@@ -72,7 +72,7 @@
 			echo "<script> setTimeout(\"location.href = 'employees.php';\", 2);</script>";
 			//header("location: employees.php?delete:$id=success");
 		}
-		
+
 		//$conn->close();
 	}
 
@@ -90,7 +90,7 @@
 
 	/* ============================= Suppliers ===============================	*/
 	function insertSupplier($conn){
-		if (isset($_POST['insert'])){			
+		if (isset($_POST['insert'])){
 			$id = $_POST['supplier_id'];
 			$name = $_POST['name'];
 			$industry = $_POST['industry'];
@@ -108,7 +108,7 @@
 			if(! $retval ) {
                 die('Could not enter data: ' . mysqli_error($conn));
 			}
-		}	
+		}
 	}
 
 	function showSuppliers($conn){
@@ -123,7 +123,7 @@
 					echo "<td>" . $row["industry"]. "</td>";
 					echo "<td>" . $row["phone"]. "</td>";
 					echo "<td>" . $row["email"]. "</td>";
-					echo "<td>" . $row["address"]. "</td>";					
+					echo "<td>" . $row["address"]. "</td>";
 					echo "<td>" . $row['website']. "</td>";
 					echo "<td>";
 						echo "<a href='editSupplier.php?edit=". $row["supplier_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
@@ -131,7 +131,7 @@
 					echo "</td>";
 				echo '</tr>';
 			}
-		} 
+		}
 		else {
 				echo "0 results";
 		}
@@ -146,8 +146,8 @@
 			$_SESSION['msg_type'] = "success";
 			echo "<script> setTimeout(\"location.href = 'suppliers.php';\", 0);</script>";
 			//header("location: suppliers.php?delete:$id=success");
-		}		
-		
+		}
+
 	}
 
 /* ============================= Items ===============================	*/
@@ -156,8 +156,8 @@
 	}
 
 	function insertItem($conn){
-		if (isset($_POST['insert'])){	
-			// 1. Get supplier information		
+		if (isset($_POST['insert'])){
+			// 1. Get supplier information
 			$supplier_id = $_POST['supplier_id'];
 			$name = $_POST['name'];
 			$industry = $_POST['industry'];
@@ -198,7 +198,7 @@
 				}
 			}
 
-			$conn->close();	
+			$conn->close();
 			// display message after submit
 			$_SESSION['message'] = "Insert Record Successlly";
 			$_SESSION['msg_type'] = "success";
@@ -215,17 +215,60 @@
 
 
 	/* ============================= Orders ===============================	*/
-	function showAllOrders(){
+	function showAllOrders($conn){
+		$sql = "SELECT * FROM orders";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			// view all employees
+			while($row = $result->fetch_assoc()) {
+				echo '<tr>';
+					echo "<td>" . $row["customer_id"]. "</td>";
+					echo "<td>" . $row["product_id"]. "</td>";
+					echo "<td>" . $row["timestamp"]. "</td>";
+					echo "<td>" . $row["quantity"]. "</td>";
+					echo "<td>";
+						echo "<a href='editOrders.php?edit=". $row["customer_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
+						echo " <a href='orders.php?delete=". $row["customer_id"]. "' class='btn btn-danger btn-sm'>Delete</a>";
+					echo "</td>";
+				echo '</tr>';
+			}
+		}
+		else {
+				echo "0 results";
+		}
+	}
 
+	function insertOrder($conn){
+		if (isset($_POST['insert'])){
+			// 1. Get oder information
+			$customer_id = $_POST['customer_id'];
+			$product_id = $_POST['product_id'];
+			$timestamp = $_POST['timestamp'];
+			$quantity = $_POST['quantity'];
+
+			// get query for insert
+			$sql = "INSERT INTO orders "."(customer_id, product_id, timestamp, quantity) "."VALUES".
+			"('$customer_id', '$product_id', '$timestamp', '$quantity')";
+			// insert to database
+			$retval = mysqli_query($conn, $sql);
+
+			if(! $retval ) {
+                die('Could not insert order, data: ' . mysqli_error($conn));
+			}
+			// display message after submit
+			$_SESSION['message'] = "Insert Record Successlly. Customer ID:  $customer_id Product ID:  $product_id Quantity: $quantity";
+			$_SESSION['msg_type'] = "success";
+			echo "<script> setTimeout(\"location.href = 'addOrders.php';\", 3000);</script>";
+		}
 	}
 
 	function getOrderByID($conn, $id){
 
 	}
 
-	function deleteOrders(){
+	function deleteOrder(){
 
 	}
 
-	
+
 ?>
