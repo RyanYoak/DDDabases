@@ -2,7 +2,7 @@
 <?php
     require_once('dbconnect.php');
     require_once('functions.php');
-    insertSupplier($conn);
+    insertItem($conn);
 ?>
 
 <!DOCTYPE html>
@@ -28,12 +28,11 @@
         </div>
         <?php endif ?>    
 	<body>
-
-        
+  
         <div a align="right"><a class="btn btn-danger" href="supplies.php">Back to View All Items</a></div>
         <div class="container">
             <b><h3 >Item Information</h3><br>
-            <form action="addSupplier.php" method="POST">
+            <form action="addItems.php" method="POST">
                 <div class="form-group row">
                     <label class="col-sm-2">Product ID*</label>
                     <input id="product_id" name="product_id" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Product ID" required>
@@ -44,18 +43,22 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Unit Price</label>
-                    <input id="unit_price" name="unit_price" type="number" step="1" min="0" class="form-control col-sm-5" placeholder="Supplier Industry">
+                    <input id="unit_price" name="unit_price" type="number" min="0" class="form-control col-sm-5" placeholder="Supplier Industry">
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Quantity*</label>
-                    <input id="quantity" name="quantity" type="number" step="1" min="0"class="form-control col-sm-5" placeholder="Phone Number">
+                    <input id="quantity" name="quantity" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Quantity">
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2">Description</label>
+                    <input id="description" name="description" type="text" class="form-control col-sm-5" placeholder="Item description">
                 </div>
 
                 <h3> Supplier Information</h3><br>
 
                 <div class="form-group row">
                     <label class="col-sm-2">Supplier ID*</label>
-                    <input id="id" name="id" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Supplier ID" required>
+                    <input id="supplier_id" name="supplier_id" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Supplier ID" required>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Supplier Name*</label>
@@ -67,7 +70,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Phone Number*</label>
-                    <input id="phone" name="phone" type="number"min="0" step="1" class="form-control col-sm-5" placeholder="Phone Number">
+                    <input id="phone" name="phone" type="number" min="1000000000" step="1" class="form-control col-sm-5" placeholder="Phone Number">
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Email*</label>

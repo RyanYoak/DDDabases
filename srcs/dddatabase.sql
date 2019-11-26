@@ -71,6 +71,7 @@ CREATE TABLE if not exists items(
   category      varchar(50),
   unit_price    numeric(9,2) not null,
   quantity      int,
+  description   varchar(255),
   primary key(product_id)
 );
 

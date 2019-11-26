@@ -91,7 +91,7 @@
 	/* ============================= Suppliers ===============================	*/
 	function insertSupplier($conn){
 		if (isset($_POST['insert'])){			
-			$id = $_POST['id'];
+			$id = $_POST['supplier_id'];
 			$name = $_POST['name'];
 			$industry = $_POST['industry'];
 			$phone = $_POST['phone'];
@@ -108,12 +108,6 @@
 			if(! $retval ) {
                 die('Could not enter data: ' . mysqli_error($conn));
 			}
-			$conn->close();
-			
-			// display message after submit
-			$_SESSION['message'] = "Insert Record Successlly, Supplier ID:  $id Name:  $name";
-			$_SESSION['msg_type'] = "success";
-			echo "<script> setTimeout(\"location.href = 'suppliers.php';\", 20);</script>";
 		}	
 	}
 
@@ -156,7 +150,60 @@
 		
 	}
 
-	function getSupplierByID($conn, $id){
+/* ============================= Items ===============================	*/
+	function showAllItems($conn){ //show item (not include supplier's information)
+		# code...
+	}
+
+	function insertItem($conn){
+		if (isset($_POST['insert'])){	
+			// 1. Get supplier information		
+			$supplier_id = $_POST['supplier_id'];
+			$name = $_POST['name'];
+			$industry = $_POST['industry'];
+			$phone = $_POST['phone'];
+			$email = $_POST['email'];
+			$address = $_POST['address'];
+			$website = $_POST['website'];
+			// 2. Get item inforation
+			$product_id = $_POST['product_id'];
+			$category = $_POST['category'];
+			$unit_price = $_POST['unit_price'];
+			$quantity = $_POST['quantity'];
+			$description = $_POST['description'];
+
+			// 3. Prepare query for inserting supplier
+			$suppSQL = "INSERT INTO supplier "."(supplier_id, name, industry, phone, email, address, website) "."VALUES".
+			"('$supplier_id', '$name', '$industry', '$phone', '$email', '$address', '$website')";
+			// 4. Prepare query for inserting product
+			$itemSQL = "INSERT INTO items "."(product_id, category, unit_price, quantity, description) "."VALUES".
+			"('$product_id', '$category', '$unit_price', '$quantity', '$description')";
+			// 5. Prepare query for inserting product
+			$sql = "INSERT INTO supplies "."(product_id, supplier_id) "."VALUES"."('$product_id', '$supplier_id')";
+
+			// 6. insert supplier, product, supplies
+			$addSupplier = mysqli_query($conn, $suppSQL);
+			$addItem = mysqli_query($conn, $itemSQL);
+
+			if(! $addSupplier ) {
+                die('Could not insert supplier, data: ' . mysqli_error($conn));
+			}
+			elseif(! $addItem ) {
+                die('Could not insert item, data: ' . mysqli_error($conn));
+			}
+			else{
+				$addSupplies = mysqli_query($conn, $sql);
+				if(! $addSupplies ) {
+					die('Could not insert item, data: ' . mysqli_error($conn));
+				}
+			}
+
+			$conn->close();	
+			// display message after submit
+			$_SESSION['message'] = "Insert Record Successlly";
+			$_SESSION['msg_type'] = "success";
+			echo "<script> setTimeout(\"location.href = 'addItems.php';\", 3000);</script>";
+		}
 
 	}
 
@@ -166,18 +213,6 @@
 
 	}
 
-	/* ============================= Items ===============================	*/
-	function showAllItems($conn){
-		# code...
-	}
-
-	function deleteItembyID($conn, $id){
-		# code...
-	}
-
-	function getItemByID($conn, $id){
-		# code...
-	}
 
 	/* ============================= Orders ===============================	*/
 	function showAllOrders(){
