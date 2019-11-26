@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Unit Price</label>
-                    <input id="unit_price" name="unit_price" type="number" min="0" class="form-control col-sm-5" placeholder="Supplier Industry">
+                    <input id="unit_price" name="unit_price" type="number" min="0" step="0.000001" class="form-control col-sm-5" placeholder="Supplier Industry">
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Quantity*</label>

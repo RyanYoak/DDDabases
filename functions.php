@@ -133,10 +133,6 @@
 	}
 
 /* ============================= Items ===============================	*/
-	function showAllItems($conn){ //show item (not include supplier's information)
-		# code...
-	}
-
 	// Insert new item to items table
 	function insertItem($conn){
 		if (isset($_POST['insert'])){
@@ -167,26 +163,72 @@
 			// 6. insert supplier, product, supplies
 			$addSupplier = mysqli_query($conn, $suppSQL);
 			$addItem = mysqli_query($conn, $itemSQL);
+			$addSupplies = mysqli_query($conn, $sql);
 			/*	if not exist supplier or not exist item then (add supllier & item , execute b4) ---> add supplies
 					if exist supplies -> die("ERRRO: Existing Record, Cannot Insert, ")  
 			 */
-			if ($addSupplier || $addItem){
-				$addSupplies = mysqli_query($conn, $sql);
-				if(! $addSupplies ) {
-					$_SESSION['message'] = "ERROR: Existing Record, Please enter new information";
-					$_SESSION['msg_type'] = "success";
-				}				
+			if ($addSupplier && $addSupplies){
+				$_SESSION['message'] = "Insert supplies Sucessfully; \n Warning: supplier ID has been taken / the supplier exists";
+				$_SESSION['msg_type'] = "warning";			
 			}
+			elseif ($addSupplier && $addSupplies){
+				$_SESSION['message'] = "Insert supplies Sucessfully; \n Warning: item ID has been taken / the item exists";
+				$_SESSION['msg_type'] = "warning";			
+			}		
+			elseif(! $addSupplies ) {
+				$_SESSION['message'] = "ERROR: Existing Record, Please enter new information";
+				$_SESSION['msg_type'] = "danger";
+			}
+			else{
+				$_SESSION['message'] = "Insert Record Successfully";
+				$_SESSION['msg_type'] = "success";
+			}
+		
+			echo "<script> setTimeout(\"location.href = 'addItems.php';\", 4500);</script>";
+		}
 
-			$conn->close();
-			// display message after submit
-			$_SESSION['message'] = "Insert Record Successlly";
+	}
+	/* Show supplies information: product_id, supplier_id, supplier.name, description,  */
+	function showSupplies($conn){ 
+		$sql = "SELECT supplies.product_id, supplies.supplier_id, supplier.name, items.description FROM supplies NATURAL JOIN  items NATURAL JOIN supplier";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				echo '<tr>';
+					echo "<td>" . $row["product_id"]. "</td>";
+					echo "<td>" . $row["supplier_id"]. "</td>";
+					echo "<td>" . $row["name"]. "</td>";
+					echo "<td>" . $row["description"]. "</td>";
+					echo "<td>";
+						echo "<a href='supplies.php?edit=". $row["product_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
+						echo " <a href='supplies.php?delete=" . $row["product_id"] . "&supplier=" . $row["supplier_id"] . "'class='btn btn-danger btn-sm'>Delete</a>";
+					echo "</td>";
+				echo '</tr>';
+			}
+		}
+		else{
+			echo "There is no supplies";
+		}
+
+		// delete supplies
+		if (isset($_GET["delete"])){
+			$product_id = $_GET["delete"];
+			$supplier_id = $_GET['supplier'];
+			$conn->query("DELETE FROM supplies WHERE supplier_id=$supplier_id AND product_id=$product_id") or die($conn->error);
+			// Display message
+			$_SESSION['message'] = "Successlly Delete Supplies, Product ID: $product_id, Supplier ID: $supplier_id";
 			$_SESSION['msg_type'] = "success";
-			echo "<script> setTimeout(\"location.href = 'addItems.php';\", 3000);</script>";
+			echo "<script> setTimeout(\"location.href = 'supplies.php';\", 3000);</script>";
+			// delete any supplies and item that's not in supplies list
+			$conn->query("DELETE FROM supplier WHERE supplier_id NOT IN (SELECT supplier_id FROM supplies);");
+			$conn->query("DELETE FROM items WHERE product_id NOT IN (SELECT product_id FROM supplies);");
 		}
 
 	}
 
+	function showAllItems($conn){ //show item (not include supplier's information)
+		# code...
+	}
 
 	/* ============================= Customers ===============================	*/
 	function showCustomers(){

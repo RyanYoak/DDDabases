@@ -28,8 +28,20 @@
 	<body>   
         <!-- display button to add new items  -->
         <div class="container"><a class="btn btn-info " href="addItems.php?insert">ADD New Items</a></div><br>
-        <!-- display items table that has: product_id, supplier_id, discription,  -->
-
+        <!-- display items table that has: product_id, supplier_id, supplier's name, discription,  -->
+        <div class="container">
+            <table id="viewTable">
+                <thead class="table table-dark">
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Supplier ID</th>
+                    <th scope="col">Supplier Name</th>
+                    <th scope="col">Product Description</th>
+                    <th scope="col">Actions</th>
+                </thead>
+                <tbody class="table table-striped">
+                    <?php  showSupplies($conn) ?>                        
+                </tbody>
+            </table>
         </div>
     </body>
     <?php include("scripts.php"); ?>
