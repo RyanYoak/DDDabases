@@ -22,35 +22,9 @@
         <!-- List of offered Products -->
 
         <div class="container">
-            <table id="empTable">
-                <thead class="table table-dark">
-                    <th scope="col">ID</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Wage</th>
-                    <th scope="col">Actions</th>
-                </thead>
-                <tbody class="table table-striped">
-                    <?php  showEmployee($conn) ?>                        
-                </tbody>
-            </table>
+                <b><h1 style="color: gray;">Comming Soon!</h1></b>
         </div>
 
     </body>
     <?php include("scripts.php"); ?>
-    <script>
-    
-        $(document).ready(function () {
-            $('#empTable').DataTable({
-                'retrieve': true,
-                "pagingType": "full_numbers",
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]]
-            });
-
-        });
-    </script>
-
     </html>

@@ -246,8 +246,8 @@
 					echo "<td>" . $row["address"]. "</td>";
 					echo "<td>" . $row["pays"]. "</td>";
 					echo "<td>";
-						echo "<a href='editEmployee.php?edit=". $row["customer_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
-						echo " <a href='employees.php?delete=". $row["customer_id"]. "' class='btn btn-danger btn-sm'>Delete</a>";
+						echo "<a href='editCustomer.php?edit=". $row["customer_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
+						echo " <a href='customers.php?delete=". $row["customer_id"]. "' class='btn btn-danger btn-sm'>Delete</a>";
 					echo "</td>";
 				echo '</tr>';
 			}
