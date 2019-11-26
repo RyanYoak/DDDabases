@@ -6,12 +6,12 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Orders Items</title>
+		<title>Payroll</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </head>
     <div>
         <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
-            <span class="navbar-brand">Manage Orders</span>
+            <span class="navbar-brand">Payroll</span>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"> 
             </div>
             <?php include("navigationMenu.php");  ?><br><br>

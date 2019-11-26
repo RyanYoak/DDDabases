@@ -4,7 +4,7 @@
                         <div class="dropdown-menu dropdown-menu-right dropdown-dark bg-dark border-secondary" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item text-light bg-dark" href="admin.html">Admin</a>
                             <a class="dropdown-item text-light bg-dark" href="employees.php">Employees</a>
-                            <a class="dropdown-item text-light bg-dark" href="payroll.php">Payroll</a>
+                            <a class="dropdown-item text-light bg-dark" href="payrolls.php">Payroll</a>
                             <a class="dropdown-item text-light bg-dark" href="customers.php">customers</a>
                             <a class="dropdown-item text-light bg-dark" href="orders.php">Orders</a>
                             <a class="dropdown-item text-light bg-dark" href="suppliers.php">Suppliers</a>
