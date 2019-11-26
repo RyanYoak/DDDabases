@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once('functions.php');
     require_once('dbconnect.php');
 ?>
@@ -17,21 +17,21 @@
             </button>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="Logs.php">Logs</a></li>                         
+                    <li class="nav-item"><a class="nav-link" href="Logs.php">Logs</a></li>
                 </ul>
-            <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"> 
+            <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
             </div>
             <?php include("navigationMenu.php");  ?><br><br>
             <!-- Display Message after edit, add and delete an employee -->
     <?php if(isset($_SESSION['message'])): ?>
     <div class="alert alert-<?=$_SESSION['msg_type']?>">
-        <?php 
+        <?php
             echo $_SESSION['message'];
             unset($_SESSION['message']);
         ?>
     </div>
         <?php endif ?><br>
-        
+
     <body>
         <!-- Display add new employee button -->
         <div class="container"><a class="btn btn-info " href="addEmployee.php?add">ADD NEW EMPLOYEE</a></div><br>

@@ -2,7 +2,7 @@
 <?php
     require_once('dbconnect.php');
     require_once('functions.php');
-    insertSupplier($conn);
+    insertOrder($conn);
 ?>
 
 <!DOCTYPE html>
@@ -18,18 +18,42 @@
                 <span class="navbar-brand">Add New Orders</span>
                 <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto"></ul>
-        <?php include("navigationMenu.php");  ?><br><br> 
+        <?php include("navigationMenu.php");  ?><br><br>
         <?php if(isset($_SESSION['message'])): ?>
         <div class="alert alert-<?=$_SESSION['msg_type']?>">
-            <?php 
+            <?php
                 echo $_SESSION['message'];
                 unset($_SESSION['message']);
             ?>
         </div>
-        <?php endif ?>    
+        <?php endif ?>
 	<body>
+    <div id="insertForm" class="container">
+        <form action="addOrders.php" method="POST">
+        <b>
+          <div class="form-group row">
+              <label class="col-sm-2">Customer ID*</label>
+              <input id="customer_id" name="customer_id" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Customer ID" required>
+          </div>
+          <div class="form-group row">
+              <label class="col-sm-2">Product ID*</label>
+              <input id="product_id" name="product_id" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Product ID" required>
+          </div>
+          <div class="form-group row">
+              <label class="col-sm-2">Order Date*</label>
+              <input id="timestamp" name="timestamp" type="date" class="form-control col-sm-5" placeholder="" required>
+          </div>
+          <div class="form-group row">
+              <label class="col-sm-2">Quantity*</label>
+              <input id="quantity" name="quantity" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Product ID" required>
+          </div>
+          <div  align="center">
+              <button name="insert" type="submit" class="btn btn-success">Insert Order</button>
+          </div>
+        </b>
+        </form>
+    </div>
 
-    
     </body>
     <?php include("scripts.php") ?>
 </html>
