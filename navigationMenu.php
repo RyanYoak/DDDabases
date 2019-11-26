@@ -9,6 +9,8 @@
                             <a class="dropdown-item text-light bg-dark" href="orders.php">Orders</a>
                             <a class="dropdown-item text-light bg-dark" href="suppliers.php">Suppliers</a>
                             <a class="dropdown-item text-light bg-dark" href="products.php">Products</a>
+                            <a class="dropdown-item text-light bg-dark" href="items.php">Items</a>
+                            <a class="dropdown-item text-light bg-dark" href="supplies.php">Supplies</a>
                             <a class="dropdown-item text-light bg-dark" href="index.html">Home</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item text-light bg-dark" href="index.html">Logout</a>
