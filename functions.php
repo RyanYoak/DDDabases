@@ -1,7 +1,7 @@
 <?php
 	/* ============================= Employees ===============================	*/
-		//$script = "$('#editForm').hide();";
-		session_start();
+	session_start();
+	// Insert new employee to employee table
 	function insertEmployee($conn){
 		if (isset($_POST['insert'])){
 			$id = $_POST['id'];
@@ -36,6 +36,7 @@
 		}
 	}
 
+	// Show important information of employees
 	function showEmployee($conn) {
 		$sql = "SELECT * FROM employee";
 		$result = $conn->query($sql);
@@ -89,28 +90,10 @@
 	}
 
 	/* ============================= Suppliers ===============================	*/
-	function insertSupplier($conn){
-		if (isset($_POST['insert'])){
-			$id = $_POST['supplier_id'];
-			$name = $_POST['name'];
-			$industry = $_POST['industry'];
-			$phone = $_POST['phone'];
-			$email = $_POST['email'];
-			$address = $_POST['address'];
-			$website = $_POST['website'];
-
-			// get query for insert
-			$sql = "INSERT INTO supplier "."(supplier_id, name, industry, phone, email, address, website) "."VALUES".
-			"('$id', '$name', '$industry', '$phone', '$email', '$address', '$website')";
-			// insert to database
-			$retval = mysqli_query($conn, $sql);
-
-			if(! $retval ) {
-                die('Could not enter data: ' . mysqli_error($conn));
-			}
-		}
-	}
-
+	/* Show employee's information
+		- Offer edit and delete options
+		- delete function 
+	*/
 	function showSuppliers($conn){
 		$sql = "SELECT * FROM supplier";
 		$result = $conn->query($sql);
@@ -147,7 +130,6 @@
 			echo "<script> setTimeout(\"location.href = 'suppliers.php';\", 0);</script>";
 			//header("location: suppliers.php?delete:$id=success");
 		}
-
 	}
 
 /* ============================= Items ===============================	*/
@@ -155,6 +137,7 @@
 		# code...
 	}
 
+	// Insert new item to items table
 	function insertItem($conn){
 		if (isset($_POST['insert'])){
 			// 1. Get supplier information
@@ -184,18 +167,15 @@
 			// 6. insert supplier, product, supplies
 			$addSupplier = mysqli_query($conn, $suppSQL);
 			$addItem = mysqli_query($conn, $itemSQL);
-
-			if(! $addSupplier ) {
-                die('Could not insert supplier, data: ' . mysqli_error($conn));
-			}
-			elseif(! $addItem ) {
-                die('Could not insert item, data: ' . mysqli_error($conn));
-			}
-			else{
+			/*	if not exist supplier or not exist item then (add supllier & item , execute b4) ---> add supplies
+					if exist supplies -> die("ERRRO: Existing Record, Cannot Insert, ")  
+			 */
+			if ($addSupplier || $addItem){
 				$addSupplies = mysqli_query($conn, $sql);
 				if(! $addSupplies ) {
-					die('Could not insert item, data: ' . mysqli_error($conn));
-				}
+					$_SESSION['message'] = "ERROR: Existing Record, Please enter new information";
+					$_SESSION['msg_type'] = "success";
+				}				
 			}
 
 			$conn->close();
@@ -259,6 +239,8 @@
 		else {
 				echo "0 results";
 		}
+
+		// Delete orders
 	}
 
 	function insertOrder($conn){
