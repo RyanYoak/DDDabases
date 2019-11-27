@@ -49,7 +49,7 @@
                     <th scope="col">Pay</th>
                 </thead>
                 <tbody class="table table-striped">
-                    <?php  showEmployee($conn) ?>
+                    <?php  showCustomers($conn) ?>
                 </tbody>
             </table>
         </div>

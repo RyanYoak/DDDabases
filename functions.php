@@ -92,7 +92,7 @@
 	/* ============================= Suppliers ===============================	*/
 	/* Show employee's information
 		- Offer edit and delete options
-		- delete function 
+		- delete function
 	*/
 	function showSuppliers($conn){
 		$sql = "SELECT * FROM supplier";
@@ -165,16 +165,16 @@
 			$addItem = mysqli_query($conn, $itemSQL);
 			$addSupplies = mysqli_query($conn, $sql);
 			/*	if not exist supplier or not exist item then (add supllier & item , execute b4) ---> add supplies
-					if exist supplies -> die("ERRRO: Existing Record, Cannot Insert, ")  
+					if exist supplies -> die("ERRRO: Existing Record, Cannot Insert, ")
 			 */
 			if ($addSupplier && $addSupplies){
 				$_SESSION['message'] = "Insert supplies Sucessfully; \n Warning: supplier ID has been taken / the supplier exists";
-				$_SESSION['msg_type'] = "warning";			
+				$_SESSION['msg_type'] = "warning";
 			}
 			elseif ($addSupplier && $addSupplies){
 				$_SESSION['message'] = "Insert supplies Sucessfully; \n Warning: item ID has been taken / the item exists";
-				$_SESSION['msg_type'] = "warning";			
-			}		
+				$_SESSION['msg_type'] = "warning";
+			}
 			elseif(! $addSupplies ) {
 				$_SESSION['message'] = "ERROR: Existing Record, Please enter new information";
 				$_SESSION['msg_type'] = "danger";
@@ -183,13 +183,13 @@
 				$_SESSION['message'] = "Insert Record Successfully";
 				$_SESSION['msg_type'] = "success";
 			}
-		
+
 			echo "<script> setTimeout(\"location.href = 'addItems.php';\", 4500);</script>";
 		}
 
 	}
 	/* Show supplies information: product_id, supplier_id, supplier.name, description,  */
-	function showSupplies($conn){ 
+	function showSupplies($conn){
 		$sql = "SELECT supplies.product_id, supplies.supplier_id, supplier.name, items.description FROM supplies NATURAL JOIN  items NATURAL JOIN supplier";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
@@ -231,7 +231,7 @@
 	}
 
 	/* ============================= Customers ===============================	*/
-	function showCustomers(){
+	function showCustomers($conn){
 		$sql = "SELECT * FROM customer";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
@@ -255,7 +255,52 @@
 		else {
 					echo "0 results";
 		}
+		// Delete customer by customer_ID
+		if (isset($_GET["delete"])){
+			$id = $_GET["delete"];
+			//Delete orders that have the customer_ID
 
+			$conn->query("DELETE FROM orders WHERE customer_id = $id") or die($conn->error);
+
+			$conn->query("DELETE FROM customer WHERE customer_id = $id") or die($conn->error);
+			$conn->close();
+
+			// display message
+			$_SESSION['message'] = "Successlly Delete Customer and orders that have ID: $id";
+			$_SESSION['msg_type'] = "success";
+			echo "<script> setTimeout(\"location.href = 'customers.php';\", 2);</script>";
+			//header("location: employees.php?delete:$id=success");
+		}
+
+}
+
+function insertCustomer($conn){
+	if (isset($_POST['insert'])){
+		$customer_id = $_POST['customer_id'];
+		$first_name = $_POST['first_name'];
+		$last_name = $_POST['last_name'];
+		$middle_name = $_POST['middle_name'];
+		$email = $_POST['email'];
+		$phone = $_POST['phone'];
+		$address = $_POST['address'];
+		$pays = $_POST['pays'];
+
+		// get query for insert
+		$sql = "INSERT INTO customer "."(customer_id, first_name, last_name, middle_name, email, phone, address, pays) "."VALUES".
+		"('$id','$first_name','$last_name', '$middle_name', '$email', '$phone', '$address', '$pays')";
+		// insert to database
+		$retval = mysqli_query($conn, $sql);
+
+		if(! $retval ) {
+							die('Could not enter data: ' . mysqli_error($conn));
+		}
+		$conn->close();
+
+		// display message after submit
+		$_SESSION['message'] = "Insert Record Successlly Customer ID:  $id Name:  $first_name $last_name";
+		$_SESSION['msg_type'] = "success";
+		echo "<script> setTimeout(\"location.href = 'addCustomer.php';\", 3000);</script>";
+	}
 }
 
 
