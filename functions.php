@@ -287,7 +287,7 @@ function insertCustomer($conn){
 
 		// get query for insert
 		$sql = "INSERT INTO customer "."(customer_id, first_name, last_name, middle_name, email, phone, address, pays) "."VALUES".
-		"('$id','$first_name','$last_name', '$middle_name', '$email', '$phone', '$address', '$pays')";
+		"('$customer_id','$first_name','$last_name', '$middle_name', '$email', '$phone', '$address', '$pays')";
 		// insert to database
 		$retval = mysqli_query($conn, $sql);
 
