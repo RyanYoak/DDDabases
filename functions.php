@@ -167,11 +167,11 @@
 			/*	if not exist supplier or not exist item then (add supllier & item , execute b4) ---> add supplies
 					if exist supplies -> die("ERRRO: Existing Record, Cannot Insert, ")
 			 */
-			if ($addSupplier && $addSupplies){
+			if (! $addSupplier && $addSupplies){
 				$_SESSION['message'] = "Insert supplies Sucessfully; \n Warning: supplier ID has been taken / the supplier exists";
 				$_SESSION['msg_type'] = "warning";
 			}
-			elseif ($addSupplier && $addSupplies){
+			elseif (! $addItems && $addSupplies){
 				$_SESSION['message'] = "Insert supplies Sucessfully; \n Warning: item ID has been taken / the item exists";
 				$_SESSION['msg_type'] = "warning";
 			}
