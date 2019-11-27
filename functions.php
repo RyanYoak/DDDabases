@@ -287,7 +287,7 @@ function insertCustomer($conn){
 
 		// get query for insert
 		$sql = "INSERT INTO customer "."(customer_id, first_name, last_name, middle_name, email, phone, address, pays) "."VALUES".
-		"('$id','$first_name','$last_name', '$middle_name', '$email', '$phone', '$address', '$pays')";
+		"('$customer_id','$first_name','$last_name', '$middle_name', '$email', '$phone', '$address', '$pays')";
 		// insert to database
 		$retval = mysqli_query($conn, $sql);
 
@@ -297,7 +297,7 @@ function insertCustomer($conn){
 		$conn->close();
 
 		// display message after submit
-		$_SESSION['message'] = "Insert Record Successlly Customer ID:  $id Name:  $first_name $last_name";
+		$_SESSION['message'] = "Insert Record Successlly Customer ID:  $customer_id Name:  $first_name $last_name";
 		$_SESSION['msg_type'] = "success";
 		echo "<script> setTimeout(\"location.href = 'addCustomer.php';\", 3000);</script>";
 	}
