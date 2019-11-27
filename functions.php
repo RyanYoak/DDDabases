@@ -297,7 +297,7 @@ function insertCustomer($conn){
 		$conn->close();
 
 		// display message after submit
-		$_SESSION['message'] = "Insert Record Successlly Customer ID:  $id Name:  $first_name $last_name";
+		$_SESSION['message'] = "Insert Record Successlly Customer ID:  $customer_id Name:  $first_name $last_name";
 		$_SESSION['msg_type'] = "success";
 		echo "<script> setTimeout(\"location.href = 'addCustomer.php';\", 3000);</script>";
 	}
