@@ -47,6 +47,7 @@
                     <th scope="col">Phone</th>
                     <th scope="col">Address</th>
                     <th scope="col">Pay</th>
+                    <th scope="col">Actions</th>
                 </thead>
                 <tbody class="table table-striped">
                     <?php  showCustomers($conn) ?>
