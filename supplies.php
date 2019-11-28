@@ -1,6 +1,7 @@
 <?php 
-    require_once('functions.php');
     require_once('dbconnect.php');
+    require_once('functions.php');
+    insertSupplies($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +14,7 @@
         <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
             <span class="navbar-brand">Manage Supplies</span>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"> 
+            <a class="btn btn-info " href="addItems.php?insert">Add New Item</a>
             </div>
             <?php include("navigationMenu.php");  ?><br>
         <br> 
@@ -26,8 +28,24 @@
         </div>
         <?php endif ?><br>
 	<body>   
-        <!-- display button to add new items  -->
-        <div class="container"><a class="btn btn-info " href="addItems.php?insert">ADD New Items</a></div><br>
+        <div class="container">
+            <form action="supplies.php" method="POST" style="background-color: lightblue; padding: 50px; width: 500px">
+                <div class="form-group row">
+                    <label style="width: 120px">Product ID: </label>
+                    <select id="fade" name="product_id" style="background-color: white;">
+                        <?php showProductID($conn); ?>
+                    </select>
+                </div>
+                <div class="form-group row">
+                    <label style="width: 120px">Supplier ID: </label>
+                    <select id="viewId" name="supplier_id" style="background-color: white;">
+                        <?php showSupplierID($conn); ?>
+                    </select>
+                </div>
+                <button id="insert" name="insert" class="btn btn-secondary" type="submit">Insert Supplies</button>
+
+            </form>
+        </div> <br>
         <!-- display items table that has: product_id, supplier_id, supplier's name, discription,  -->
         <div class="container">
             <table id="viewTable">
@@ -39,7 +57,7 @@
                     <th scope="col">Actions</th>
                 </thead>
                 <tbody class="table table-striped">
-                    <?php  showSupplies($conn) ?>                        
+                    <?php showSupplies($conn); ?>                        
                 </tbody>
             </table>
         </div>

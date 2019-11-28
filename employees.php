@@ -50,7 +50,7 @@
                     <th scope="col">Actions</th>
                 </thead>
                 <tbody class="table table-striped">
-                    <?php  showEmployee($conn) ?>                        
+                    <?php  showEmployee($conn); ?>                        
                 </tbody>
             </table>
         </div>

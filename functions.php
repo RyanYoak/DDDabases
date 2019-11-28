@@ -64,6 +64,9 @@
 		// Delete employee by employee_ID
 		if (isset($_GET["delete"])){
 			$id = $_GET["delete"];
+
+			$conn->query("DELETE FROM payroll WHERE employee_id = $id") or die($conn->error);
+			$conn->query("DELETE FROM logs WHERE employee_id = $id") or die($conn->error);
 			$conn->query("DELETE FROM employee WHERE employee_id = $id") or die($conn->error);
 			$conn->close();
 
@@ -132,7 +135,19 @@
 		}
 	}
 
-/* ============================= Items ===============================	*/
+	// Show supplier ID
+	function showSupplierID($conn) {
+		$sql = "SELECT supplier_id FROM supplier";
+		$result = mysqli_query($conn, $sql) or die($conn->error);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {		
+				echo $row["supplier_id"];		
+				echo "<option value=" . $row["supplier_id"] . ">" . $row["supplier_id"] . "</option>";
+			}
+		}
+	}
+
+/* ============================= Items & Supplies ===============================	*/
 	// Insert new item to items table
 	function insertItem($conn){
 		if (isset($_POST['insert'])){
@@ -223,19 +238,47 @@
 			$conn->query("DELETE FROM supplier WHERE supplier_id NOT IN (SELECT supplier_id FROM supplies);");
 			$conn->query("DELETE FROM items WHERE product_id NOT IN (SELECT product_id FROM supplies);");
 		}
-
+		$conn->close();
 	}
 
+	function insertSupplies($conn){
+		if (isset($_POST["insert"])){
+			$product_id = $_POST["product_id"];
+			$supplier_id = $_POST["supplier_id"];
+			//insert rescord
+			$sql = "INSERT INTO supplies "."(product_id, supplier_id) "."VALUES"."('$product_id', '$supplier_id')";
+			$conn->query("INSERT INTO supplies (product_id, supplier_id) VALUES ('$product_id', '$supplier_id')") or die($conn->error);
+			//$result = mysqli_query($conn, $sql);
+			$_SESSION['message'] = "Insert Record Successlly";
+			$_SESSION['msg_type'] = "success";
+			echo "<script> setTimeout(\"location.href = 'supplies.php';\", 0);</script>";
+		}
+	}
+
+	// show product ID
+	function showProductID($conn) {
+		$sql = "SELECT product_id FROM items";
+		$result = mysqli_query($conn, $sql) or die($conn->error);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {		
+				echo $row["product_id"];		
+				echo "<option value=" . $row["product_id"] . ">" . $row["product_id"] . "</option>";
+			}
+		}
+	}
+	
 	function showAllItems($conn){ //show item (not include supplier's information)
 		# code...
 	}
+
+
 
 	/* ============================= Customers ===============================	*/
 	function showCustomers($conn){
 		$sql = "SELECT * FROM customer";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
-			// view all employees
+			// view all customers
 			while($row = $result->fetch_assoc()) {
 				echo '<tr>';
 					echo "<td>" . $row["customer_id"]. "</td>";
@@ -261,7 +304,6 @@
 			//Delete orders that have the customer_ID
 
 			$conn->query("DELETE FROM orders WHERE customer_id = $id") or die($conn->error);
-
 			$conn->query("DELETE FROM customer WHERE customer_id = $id") or die($conn->error);
 			$conn->close();
 
@@ -269,7 +311,6 @@
 			$_SESSION['message'] = "Successlly Delete Customer and orders that have ID: $id";
 			$_SESSION['msg_type'] = "success";
 			echo "<script> setTimeout(\"location.href = 'customers.php';\", 2);</script>";
-			//header("location: employees.php?delete:$id=success");
 		}
 
 }
@@ -309,7 +350,7 @@ function insertCustomer($conn){
 		$sql = "SELECT * FROM orders";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
-			// view all employees
+			// view all orders
 			while($row = $result->fetch_assoc()) {
 				echo '<tr>';
 					echo "<td>" . $row["customer_id"]. "</td>";

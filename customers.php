@@ -11,16 +11,8 @@
     </head>
     <div>
         <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
-            <span class="navbar-brand">Manage Customers</span>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
-              <ul class="navbar-nav mr-auto">
-                  <li class="nav-item"><a class="nav-link" href="Logs.php">Logs</a></li>
-              </ul>
-            <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
-            </div>
+            <span class="navbar-brand">Manage Customers</span> 
+            <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"></div>
             <?php include("navigationMenu.php");  ?><br><br>
             <!-- Display Message after edit, add and delete -->
     <?php if(isset($_SESSION['message'])): ?>

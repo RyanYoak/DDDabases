@@ -2,7 +2,7 @@
 <?php
     require_once('dbconnect.php');
     require_once('functions.php');
-    insertSupplier($conn);
+    //insertSupplier($conn);
 ?>
 
 <!DOCTYPE html>

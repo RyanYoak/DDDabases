@@ -12,8 +12,7 @@
     <div>
         <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
             <span class="navbar-brand">Manage Logs</span>
-            <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"> 
-            </div>
+            <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"></div>
             <?php include("navigationMenu.php");  ?><br><br>
             <!-- Display Message after edit, add and delete -->
     <?php if(isset($_SESSION['message'])): ?>
