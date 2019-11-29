@@ -140,8 +140,8 @@
 		$sql = "SELECT supplier_id FROM supplier";
 		$result = mysqli_query($conn, $sql) or die($conn->error);
 		if ($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {		
-				echo $row["supplier_id"];		
+			while($row = $result->fetch_assoc()) {
+				echo $row["supplier_id"];
 				echo "<option value=" . $row["supplier_id"] . ">" . $row["supplier_id"] . "</option>";
 			}
 		}
@@ -260,13 +260,13 @@
 		$sql = "SELECT product_id FROM items";
 		$result = mysqli_query($conn, $sql) or die($conn->error);
 		if ($result->num_rows > 0) {
-			while($row = $result->fetch_assoc()) {		
-				echo $row["product_id"];		
+			while($row = $result->fetch_assoc()) {
+				echo $row["product_id"];
 				echo "<option value=" . $row["product_id"] . ">" . $row["product_id"] . "</option>";
 			}
 		}
 	}
-	
+
 	function showAllItems($conn){ //show item (not include supplier's information)
 		# code...
 	}
@@ -358,8 +358,8 @@ function insertCustomer($conn){
 					echo "<td>" . $row["timestamp"]. "</td>";
 					echo "<td>" . $row["quantity"]. "</td>";
 					echo "<td>";
-						echo "<a href='editOrders.php?edit=". $row["customer_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
-						echo " <a href='orders.php?delete=". $row["customer_id"]. "' class='btn btn-danger btn-sm'>Delete</a>";
+						echo "<a href='editOrders.php?edit=". $row["customer_id"] . "&product_id=" . $row["product_id"] . "&timestamp=" . $row["timestamp"] ."' class='btn btn-info btn-sm'>Edit</a>";
+						echo " <a href='orders.php?delete=". $row["customer_id"] . "&product_id=" . $row["product_id"] . "&timestamp=" . $row["timestamp"] ."' class='btn btn-danger btn-sm'>Delete</a>";
 					echo "</td>";
 				echo '</tr>';
 			}
