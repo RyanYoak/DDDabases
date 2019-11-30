@@ -368,22 +368,7 @@ function insertCustomer($conn){
 				echo "0 results";
 		}
 
-		// Delete selected order
-		if (isset($_GET["delete"])){
-			$customer_id = $_GET["delete"];
-			$product_id = $_GET["product_id"];
-			$timestamp = $_GET["timestamp"];
-
-			//Delete orders that have the customer_ID
-
-			$conn->query("DELETE FROM orders WHERE customer_id = '$customer_id' AND product_id = '$product_id' AND timestamp='$timestamp'") or die($conn->error);
-			$conn->close();
-
-			// display message
-			$_SESSION['message'] = "Successlly Delete orders";
-			$_SESSION['msg_type'] = "success";
-			echo "<script> setTimeout(\"location.href = 'orders.php';\", 2);</script>";
-		}
+		// Delete orders
 	}
 
 	function insertOrder($conn){
@@ -391,11 +376,12 @@ function insertCustomer($conn){
 			// 1. Get oder information
 			$customer_id = $_POST['customer_id'];
 			$product_id = $_POST['product_id'];
-			$timestamp = date("Y-m-d H:i:s");
+			$timestamp = $_POST['timestamp'];
 			$quantity = $_POST['quantity'];
 
 			// get query for insert
-			$sql = "INSERT INTO orders "."(customer_id, product_id, timestamp, quantity) "."VALUES". "('$customer_id', '$product_id', '$timestamp', '$quantity')";
+			$sql = "INSERT INTO orders "."(customer_id, product_id, timestamp, quantity) "."VALUES".
+			"('$customer_id', '$product_id', '$timestamp', '$quantity')";
 			// insert to database
 			$retval = mysqli_query($conn, $sql);
 
@@ -408,4 +394,76 @@ function insertCustomer($conn){
 			echo "<script> setTimeout(\"location.href = 'addOrders.php';\", 3000);</script>";
 		}
 	}
+
+	function getOrderByID($conn, $id){
+
+	}
+
+	function deleteOrder(){
+
+	}
+
+	/* ============================= Payrolls ===============================	*/
+	function showPayrolls($conn) {
+		$sql = "SELECT * from payroll";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			// view all payrolls
+			while($row = $result->fetch_assoc()) {
+				echo '<tr>';
+					echo "<td>" . $row["employee_id"]. "</td>";
+					echo "<td>" . $row["pay_date"]. "</td>";
+					echo "<td>" . $row["paycheck_amount"]. "</td>";
+					echo "<td>";
+						echo " <a href='editPaycheck.php?edit=". $row["employee_id"] . "&pay_date=" . $row["pay_date"] . "&paycheck_amount=" . $row["paycheck_amount"] ."' class='btn btn-info btn-sm'>Edit</a>";
+						echo " <a href='paycheck.php?delete=". $row["employee_id"] . "&pay_date=" . $row["pay_date"] . "&paycheck_amount=" . $row["paycheck_amount"] ."' class='btn btn-danger btn-sm'>Delete</a>";
+					echo "</td>";
+				echo '</tr>';
+			}
+		}
+		
+		else {
+			echo "0 results";
+		}
+		
+		// Delete paycheck by employee_ID, date
+		if (isset($_GET["delete"])){
+			$employee_id = $_GET["delete"];
+			$pay_date = $_GET["pay_date"];
+			//Delete paycheck that has the employee id, date
+
+			$conn->query("DELETE FROM payroll WHERE employee_id = $employee_id AND pay_date = $pay_date") or die($conn->error);
+			$conn->close();
+
+			// display message
+			$_SESSION['message'] = "Successlly deleted paycheck that has ID: $employee_id, Date: $pay_date";
+			$_SESSION['msg_type'] = "success";
+			echo "<script> setTimeout(\"location.href = 'payrolls.php';\", 2);</script>";
+		}
+	}
+
+	function insertPaycheck($conn) {
+		if (isset($_POST['insert'])){
+			$employee_id = $_POST['employee_id'];
+			$pay_date = $_POST['pay_date'];
+			$paycheck_amount = $_POST['paycheck_amount'];
+
+			// get query for insert
+			$sql = "INSERT INTO payroll "."(employee_id, pay_date, paycheck_amount) "."VALUES".
+			"('$employee_id', '$pay_date', '$paycheck_amount')";
+			
+			// insert to database
+			$retval = mysqli_query($conn, $sql);
+
+			if(! $retval ) {
+                		die('Could not insert paycheck, data: ' . mysqli_error($conn));
+			}
+
+			// display message after submit
+			$_SESSION['message'] = "Insert Record Successlly. Employee ID:  $employee_id Date:  $pay_date Amount: $paycheck_amount";
+			$_SESSION['msg_type'] = "success";
+			echo "<script> setTimeout(\"location.href = 'addPaycheck.php';\", 3000);</script>";
+		}
+
+	}	
 ?>
