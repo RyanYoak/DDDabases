@@ -40,10 +40,6 @@
               <input id="product_id" name="product_id" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Product ID" required>
           </div>
           <div class="form-group row">
-              <label class="col-sm-2">Order Date*</label>
-              <input id="timestamp" name="timestamp" type="date" class="form-control col-sm-5" placeholder="" required>
-          </div>
-          <div class="form-group row">
               <label class="col-sm-2">Quantity*</label>
               <input id="quantity" name="quantity" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Product ID" required>
           </div>

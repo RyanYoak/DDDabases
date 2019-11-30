@@ -368,7 +368,22 @@ function insertCustomer($conn){
 				echo "0 results";
 		}
 
-		// Delete orders
+		// Delete selected order
+		if (isset($_GET["delete"])){
+			$customer_id = $_GET["delete"];
+			$product_id = $_GET["product_id"];
+			$timestamp = $_GET["timestamp"];
+
+			//Delete orders that have the customer_ID
+
+			$conn->query("DELETE FROM orders WHERE customer_id = '$customer_id' AND product_id = '$product_id' AND timestamp='$timestamp'") or die($conn->error);
+			$conn->close();
+
+			// display message
+			$_SESSION['message'] = "Successlly Delete orders";
+			$_SESSION['msg_type'] = "success";
+			echo "<script> setTimeout(\"location.href = 'orders.php';\", 2);</script>";
+		}
 	}
 
 	function insertOrder($conn){
@@ -376,12 +391,11 @@ function insertCustomer($conn){
 			// 1. Get oder information
 			$customer_id = $_POST['customer_id'];
 			$product_id = $_POST['product_id'];
-			$timestamp = $_POST['timestamp'];
+			$timestamp = date("Y-m-d H:i:s");
 			$quantity = $_POST['quantity'];
 
 			// get query for insert
-			$sql = "INSERT INTO orders "."(customer_id, product_id, timestamp, quantity) "."VALUES".
-			"('$customer_id', '$product_id', '$timestamp', '$quantity')";
+			$sql = "INSERT INTO orders "."(customer_id, product_id, timestamp, quantity) "."VALUES". "('$customer_id', '$product_id', '$timestamp', '$quantity')";
 			// insert to database
 			$retval = mysqli_query($conn, $sql);
 
@@ -394,14 +408,4 @@ function insertCustomer($conn){
 			echo "<script> setTimeout(\"location.href = 'addOrders.php';\", 3000);</script>";
 		}
 	}
-
-	function getOrderByID($conn, $id){
-
-	}
-
-	function deleteOrder(){
-
-	}
-
-
 ?>
