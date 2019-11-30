@@ -72,7 +72,7 @@
               </div>
                 <div class="form-group row">
                     <label class="col-sm-2">timestamp</label>
-                    <input id="timestamp" name="timestamp" value="<?php echo $timestamp; ?>" type="date" class="form-control col-sm-5" placeholder="" required>
+                    <input id="timestamp" name="timestamp" value="<?php echo $timestamp; ?>" type="datetime" class="form-control col-sm-5" placeholder="" required>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Quantity</label>
