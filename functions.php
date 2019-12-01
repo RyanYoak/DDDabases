@@ -91,7 +91,7 @@
 		$employee = $result->fetch_assoc();
 		return $employee;
 	}
-	
+
 	function showEmployeeID($conn) {
 		$sql = "SELECT employee_id FROM employee";
 		$result = mysqli_query($conn, $sql) or die($conn->error);
@@ -102,7 +102,7 @@
 			}
 		}
 	}
-	
+
 
 	/* ============================= Suppliers ===============================	*/
 	/* Show employee's information
@@ -299,7 +299,7 @@
 					echo "<td>" . $row["email"]. "</td>";
 					echo "<td>" . $row["phone"]. "</td>";
 					echo "<td>" . $row["address"]. "</td>";
-					echo "<td>" . $row["pays"]. "</td>";
+					//echo "<td>" . $row["pays"]. "</td>";
 					echo "<td>";
 						echo "<a href='editCustomer.php?edit=". $row["customer_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
 						echo " <a href='customers.php?delete=". $row["customer_id"]. "' class='btn btn-danger btn-sm'>Delete</a>";
@@ -336,11 +336,11 @@ function insertCustomer($conn){
 		$email = $_POST['email'];
 		$phone = $_POST['phone'];
 		$address = $_POST['address'];
-		$pays = $_POST['pays'];
+		//$pays = $_POST['pays'];
 
 		// get query for insert
-		$sql = "INSERT INTO customer "."(customer_id, first_name, last_name, middle_name, email, phone, address, pays) "."VALUES".
-		"('$customer_id','$first_name','$last_name', '$middle_name', '$email', '$phone', '$address', '$pays')";
+		$sql = "INSERT INTO customer "."(customer_id, first_name, last_name, middle_name, email, phone, address) "."VALUES".
+		"('$customer_id','$first_name','$last_name', '$middle_name', '$email', '$phone', '$address')";
 		// insert to database
 		$retval = mysqli_query($conn, $sql);
 
@@ -440,11 +440,11 @@ function insertCustomer($conn){
 				echo '</tr>';
 			}
 		}
-		
+
 		else {
 			echo "0 results";
 		}
-		
+
 		// Delete paycheck by employee_ID, date
 		if (isset($_GET["delete"])){
 			$employee_id = $_GET["delete"];
@@ -470,7 +470,7 @@ function insertCustomer($conn){
 			// get query for insert
 			$sql = "INSERT INTO payroll "."(employee_id, pay_date, paycheck_amount) "."VALUES".
 			"('$employee_id', '$pay_date', '$paycheck_amount')";
-			
+
 			// insert to database
 			$retval = mysqli_query($conn, $sql);
 
@@ -484,5 +484,5 @@ function insertCustomer($conn){
 			echo "<script> setTimeout(\"location.href = 'addPaycheck.php';\", 3000);</script>";
 		}
 
-	}	
+	}
 ?>
