@@ -245,7 +245,7 @@
 			// Display message
 			$_SESSION['message'] = "Successlly Delete Supplies, Product ID: $product_id, Supplier ID: $supplier_id";
 			$_SESSION['msg_type'] = "success";
-			echo "<script> setTimeout(\"location.href = 'supplies.php';\", 1);</script>";
+			echo "<script> setTimeout(\"location.href = 'supplies.php';\", 3000);</script>";
 			// delete any supplies and item that's not in supplies list
 			$conn->query("DELETE FROM supplier WHERE supplier_id NOT IN (SELECT supplier_id FROM supplies);");
 			$conn->query("DELETE FROM items WHERE product_id NOT IN (SELECT product_id FROM supplies);");
@@ -299,10 +299,7 @@
 					echo "<td>" . $row["email"]. "</td>";
 					echo "<td>" . $row["phone"]. "</td>";
 					echo "<td>" . $row["address"]. "</td>";
-<<<<<<< HEAD
 					//echo "<td>" . $row["pays"]. "</td>";
-=======
->>>>>>> 2aa5e709845c92cde45f0ce1333356cdf7aca913
 					echo "<td>";
 						echo "<a href='editCustomer.php?edit=". $row["customer_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
 						echo " <a href='customers.php?delete=". $row["customer_id"]. "' class='btn btn-danger btn-sm'>Delete</a>";
@@ -339,16 +336,10 @@ function insertCustomer($conn){
 		$email = $_POST['email'];
 		$phone = $_POST['phone'];
 		$address = $_POST['address'];
-<<<<<<< HEAD
 		//$pays = $_POST['pays'];
 
 		// get query for insert
 		$sql = "INSERT INTO customer "."(customer_id, first_name, last_name, middle_name, email, phone, address) "."VALUES".
-=======
-
-		// get query for insert
-		$sql = "INSERT INTO customer "."(customer_id, first_name, last_name, middle_name, email, phone, address, pays) "."VALUES".
->>>>>>> 2aa5e709845c92cde45f0ce1333356cdf7aca913
 		"('$customer_id','$first_name','$last_name', '$middle_name', '$email', '$phone', '$address')";
 		// insert to database
 		$retval = mysqli_query($conn, $sql);
