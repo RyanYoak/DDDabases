@@ -35,10 +35,6 @@
             <form action="addEmployee.php" method="POST">
                 <b>
                 <div class="form-group row">
-                    <label class="col-sm-2">Employee ID*</label>
-                    <input id="id" name="id" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Employee ID" required>
-                </div>
-                <div class="form-group row">
                     <label class="col-sm-2">First Name*</label>
                     <input id="first_name" name="first_name" type="text" class="form-control col-sm-5" placeholder="First Name" required>
                 </div>

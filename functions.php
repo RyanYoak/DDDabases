@@ -4,7 +4,6 @@
 	// Insert new employee to employee table
 	function insertEmployee($conn){
 		if (isset($_POST['insert'])){
-			$id = $_POST['id'];
 			$first_name = $_POST['first_name'];
 			$last_name = $_POST['last_name'];
 			$middle_name = $_POST['middle_name'];
@@ -19,8 +18,8 @@
 			$hiring_date = $_POST['hiring_date'];
 
 			// get query for insert
-			$sql = "INSERT INTO employee "."(employee_id, first_name, last_name, middle_name, ssn, gender, birthday, email, phone, address, position, wage, hiring_date) "."VALUES".
-			"('$id','$first_name','$last_name', '$middle_name', '$ssn', '$gender', '$birthday', '$email', '$phone', '$address', '$position', '$wage', '$hiring_date')";
+			$sql = "INSERT INTO employee "."(first_name, last_name, middle_name, ssn, gender, birthday, email, phone, address, position, wage, hiring_date) "."VALUES".
+			"('$first_name','$last_name', '$middle_name', '$ssn', '$gender', '$birthday', '$email', '$phone', '$address', '$position', '$wage', '$hiring_date')";
 			// insert to database
 			$retval = mysqli_query($conn, $sql);
 
@@ -30,7 +29,7 @@
 			$conn->close();
 
 			// display message after submit
-			$_SESSION['message'] = "Insert Record Successlly Employee ID:  $id Name:  $first_name $last_name";
+			$_SESSION['message'] = "Insert Record Successlly Name:  $first_name $last_name";
 			$_SESSION['msg_type'] = "success";
 			echo "<script> setTimeout(\"location.href = 'addEmployee.php';\", 3000);</script>";
 		}
@@ -164,7 +163,6 @@
 	function insertItem($conn){
 		if (isset($_POST['insert'])){
 			// 1. Get supplier information
-			$supplier_id = $_POST['supplier_id'];
 			$name = $_POST['name'];
 			$industry = $_POST['industry'];
 			$phone = $_POST['phone'];
@@ -179,11 +177,11 @@
 			$description = $_POST['description'];
 
 			// 3. Prepare query for inserting supplier
-			$suppSQL = "INSERT INTO supplier "."(supplier_id, name, industry, phone, email, address, website) "."VALUES".
-			"('$supplier_id', '$name', '$industry', '$phone', '$email', '$address', '$website')";
+			$suppSQL = "INSERT INTO supplier "."(name, industry, phone, email, address, website) "."VALUES".
+			"('$name', '$industry', '$phone', '$email', '$address', '$website')";
 			// 4. Prepare query for inserting product
-			$itemSQL = "INSERT INTO items "."(product_id, category, unit_price, quantity, description) "."VALUES".
-			"('$product_id', '$category', '$unit_price', '$quantity', '$description')";
+			$itemSQL = "INSERT INTO items "."(category, unit_price, quantity, description) "."VALUES".
+			"('$category', '$unit_price', '$quantity', '$description')";
 			// 5. Prepare query for inserting product
 			$sql = "INSERT INTO supplies "."(product_id, supplier_id) "."VALUES"."('$product_id', '$supplier_id')";
 
@@ -329,7 +327,6 @@
 
 function insertCustomer($conn){
 	if (isset($_POST['insert'])){
-		$customer_id = $_POST['customer_id'];
 		$first_name = $_POST['first_name'];
 		$last_name = $_POST['last_name'];
 		$middle_name = $_POST['middle_name'];
@@ -339,8 +336,8 @@ function insertCustomer($conn){
 		//$pays = $_POST['pays'];
 
 		// get query for insert
-		$sql = "INSERT INTO customer "."(customer_id, first_name, last_name, middle_name, email, phone, address) "."VALUES".
-		"('$customer_id','$first_name','$last_name', '$middle_name', '$email', '$phone', '$address')";
+		$sql = "INSERT INTO customer "."(first_name, last_name, middle_name, email, phone, address) "."VALUES".
+		"('$first_name','$last_name', '$middle_name', '$email', '$phone', '$address')";
 		// insert to database
 		$retval = mysqli_query($conn, $sql);
 
@@ -350,7 +347,7 @@ function insertCustomer($conn){
 		$conn->close();
 
 		// display message after submit
-		$_SESSION['message'] = "Insert Record Successlly Customer ID:  $customer_id Name:  $first_name $last_name";
+		$_SESSION['message'] = "Insert Record Successlly Name:  $first_name $last_name";
 		$_SESSION['msg_type'] = "success";
 		echo "<script> setTimeout(\"location.href = 'addCustomer.php';\", 3000);</script>";
 	}

@@ -35,10 +35,6 @@
         <form action="addCustomer.php" method="POST">
             <b>
             <div class="form-group row">
-                <label class="col-sm-2">Customer ID*</label>
-                <input id="customer_id" name="customer_id" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Customer ID" required>
-            </div>
-            <div class="form-group row">
                 <label class="col-sm-2">First Name*</label>
                 <input id="first_name" name="first_name" type="text" class="form-control col-sm-5" placeholder="First Name" required>
             </div>

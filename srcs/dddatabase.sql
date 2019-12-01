@@ -4,11 +4,11 @@ use dddatabase;
 /*==================== logs - employee - payroll =================== */
 /* table 1*/
 CREATE TABLE if not exists employee (
-	employee_id     int,
+	employee_id     int AUTO_INCREMENT,
 	first_name      varchar(20) NOT NULL,
 	last_name       varchar(20) NOT NULL,
 	middle_name     varchar(20),
-  ssn             int,
+  ssn             bigint,
   birthday        date NOT NULL,
   gender         	varchar(7),
 	email           varchar(100) NOT NULL,
@@ -44,22 +44,22 @@ CREATE TABLE IF NOT EXISTS logs(
 
 /* table 4 */
 CREATE TABLE IF NOT EXISTS customer (
-	customer_id 	int,
+	customer_id 	int AUTO_INCREMENT,
 	first_name		varchar(20) NOT NULL,
 	last_name			varchar(20) NOT NULL,
 	middle_name		varchar(20),
 	email					varchar(100) NOT NULL,
-	phone       	int NOT NULL,
+	phone       	bigint NOT NULL,
   address 			varchar(255),
   primary key(customer_id)
   );
 
 /* table 5 */
 CREATE TABLE if not exists supplier (
-  supplier_id   int,
+  supplier_id   int ,
   name          varchar(20) NOT NULL,
   industry      varchar(20),
-  phone         int NOT NULL,
+  phone         bigint NOT NULL,
   email         varchar(100) NOT NULL,
   address       varchar(50) NOT NULL,
   website       varchar(255),
