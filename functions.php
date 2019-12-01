@@ -91,6 +91,18 @@
 		$employee = $result->fetch_assoc();
 		return $employee;
 	}
+	
+	function showEmployeeID($conn) {
+		$sql = "SELECT employee_id FROM employee";
+		$result = mysqli_query($conn, $sql) or die($conn->error);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				echo $row["employee_id"];
+				echo "<option value=" . $row["employee_id"] . ">" . $row["employee_id"] . "</option>";
+			}
+		}
+	}
+	
 
 	/* ============================= Suppliers ===============================	*/
 	/* Show employee's information
