@@ -50,7 +50,7 @@
 
 			<div class="form-group row">
 				<label class="col-sm-2">Amount*</label>
-				<input id="paycheck_amount" name="paycheck_amount" type="number" min="0" step="10" class="form-control col-sm-5" placeholder="Amount" required>
+				<input id="paycheck_amount" name="paycheck_amount" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Amount" required>
 			</div>
 
 			<button name="insert" type="submit" class="btn btn-success">Insert Record</button>  
