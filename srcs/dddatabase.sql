@@ -17,6 +17,7 @@ CREATE TABLE if not exists employee (
 	position		    varchar(50),
 	wage			      numeric(9, 2),
 	hiring_date		  date,
+	CONSTRAINT uni_social UNIQUE (ssn),
 	primary key (employee_id)
 );
 
