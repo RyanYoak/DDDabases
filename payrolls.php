@@ -42,6 +42,7 @@
 				<th scope = "col"> ID </th>
 				<th scope = "col"> Date </th>
 				<th scope = "col"> Amount </th>
+				<th scope = "col"> Actions </th>
 			</thead>
 			<tbody class = "table table-striped">
 				<?php  showPayrolls($conn) ?>
