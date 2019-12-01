@@ -50,7 +50,6 @@ CREATE TABLE IF NOT EXISTS customer (
 	email					varchar(100) NOT NULL,
 	phone       	int NOT NULL,
   address 			varchar(255),
-  pays          bigint,
   primary key(customer_id)
   );
 
