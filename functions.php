@@ -403,7 +403,7 @@ function insertCustomer($conn){
 			// 1. Get oder information
 			$customer_id = $_POST['customer_id'];
 			$product_id = $_POST['product_id'];
-			$timestamp = $_date['"Y-m-d H:i:s"'];
+			$timestamp = date("Y-m-d H:i:s");
 			$quantity = $_POST['quantity'];
 
 			// get query for insert
