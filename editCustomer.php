@@ -16,7 +16,7 @@
         $email = $row['email'];
         $phone = $row['phone'];
         $address = $row['address'];
-        //$pays = $row['pays'];
+        $pays = $row['pays'];
     }
         // update selected employee
     if (isset($_POST['update'])){
@@ -27,11 +27,11 @@
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $address = $_POST['address'];
-        //$pays = $_POST['pays'];
+        $pays = $_POST['pays'];
         // Update record
         $mySQL= "UPDATE customer
                  SET first_name='$first_name', last_name='$last_name', middle_name='$middle_name',
-                        email='$email', phone='$phone', address='$address'
+                        email='$email', phone='$phone', address='$address',  pays='$pays'
                  WHERE customer_id = $id;";
         $retval = mysqli_query($conn, $mySQL);
         if(! $retval ) {
@@ -93,7 +93,10 @@
                     <input id="address" name="address" value="<?php echo $address; ?>" type="text" class="form-control col-sm-5" placeholder="" required>
                 </div>
 
-                
+                <div class="form-group row">
+                    <label class="col-sm-2">Pays</label>
+                    <input id="pays" name="pays" value="<?php echo $pays; ?>" type="text" class="form-control col-sm-5" placeholder="" required>
+                </div>
 
                 <div  align="center">
                     <button name="update" type="submit" class="btn btn-success">Update</button>

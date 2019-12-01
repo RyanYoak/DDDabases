@@ -11,7 +11,7 @@
     </head>
     <div>
         <nav role="navigation" class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark" style="width=: 100%;">
-            <span class="navbar-brand">Manage Customers</span>
+            <span class="navbar-brand">Manage Customers</span> 
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse"></div>
             <?php include("navigationMenu.php");  ?><br><br>
             <!-- Display Message after edit, add and delete -->
@@ -38,7 +38,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Address</th>
-
+                    <th scope="col">Pay</th>
                     <th scope="col">Actions</th>
                 </thead>
                 <tbody class="table table-striped">

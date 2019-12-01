@@ -64,7 +64,10 @@
                 <input id="address" name="address" type="text" class="form-control col-sm-5" placeholder="" required>
             </div>
 
-
+            <div class="form-group row">
+                <label class="col-sm-2">Pay*</label>
+                <input id="pays" name="pays" type="number" class="form-control col-sm-5" placeholder="" required>
+            </div>
             <div  align="center">
                 <button name="insert" type="submit" class="btn btn-success">Insert Customer</button>
             </div>
