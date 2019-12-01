@@ -37,9 +37,11 @@
 		<b><h3 >Paycheck Information</h3><br>
 		<form action="addPaycheck.php" method="POST">
 			<div class="form-group row">
-				<label class="col-sm-2">Employee ID*</label>
-				<input id="employee_id" name="employee_id" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="Employee ID" required>
-			</div>
+				<label style="width: 120px">Employee ID*: </label>
+                    <select id="fade" name="employee_id" style="background-color: white;" required>
+                        <?php showEmployeeID($conn); ?>
+                    </select>
+                </div>
 
 			<div class="form-group row">
 				<label class="col-sm-2">Date*</label>
