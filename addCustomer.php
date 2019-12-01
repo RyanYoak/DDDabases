@@ -64,10 +64,7 @@
                 <input id="address" name="address" type="text" class="form-control col-sm-5" placeholder="" required>
             </div>
 
-<<<<<<< HEAD
             
-=======
->>>>>>> 2aa5e709845c92cde45f0ce1333356cdf7aca913
             <div  align="center">
                 <button name="insert" type="submit" class="btn btn-success">Insert Customer</button>
             </div>
