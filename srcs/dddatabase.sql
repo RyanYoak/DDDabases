@@ -23,9 +23,10 @@ CREATE TABLE if not exists employee (
 /* table 2 */
 CREATE TABLE if NOT EXISTS payroll (
 	employee_id     int,
-  pay_date        date NOT NULL UNIQUE,
+	pay_date        date,
 	paycheck_amount	numeric(9,2) NOT NULL,
-	foreign key (employee_id) references employee(employee_id)
+	foreign key (employee_id) references employee(employee_id),
+	CONSTRAINT uni_payroll PRIMARY KEY (employee_id, pay_date)
 );
 
 /* table 3 */
