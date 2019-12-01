@@ -435,7 +435,7 @@ function insertCustomer($conn){
 					echo "<td>" . $row["paycheck_amount"]. "</td>";
 					echo "<td>";
 						echo " <a href='editPaycheck.php?edit=". $row["employee_id"] . "&pay_date=" . $row["pay_date"] . "&paycheck_amount=" . $row["paycheck_amount"] ."' class='btn btn-info btn-sm'>Edit</a>";
-						echo " <a href='paycheck.php?delete=". $row["employee_id"] . "&pay_date=" . $row["pay_date"] . "&paycheck_amount=" . $row["paycheck_amount"] ."' class='btn btn-danger btn-sm'>Delete</a>";
+						echo " <a href='payrolls.php?delete=". $row["employee_id"] . "&pay_date=" . $row["pay_date"] . "&paycheck_amount=" . $row["paycheck_amount"] ."' class='btn btn-danger btn-sm'>Delete</a>";
 					echo "</td>";
 				echo '</tr>';
 			}
@@ -451,7 +451,7 @@ function insertCustomer($conn){
 			$pay_date = $_GET["pay_date"];
 			//Delete paycheck that has the employee id, date
 
-			$conn->query("DELETE FROM payroll WHERE employee_id = $employee_id AND pay_date = $pay_date") or die($conn->error);
+			$conn->query("DELETE FROM payroll "."WHERE "."employee_id = "."'$employee_id' "."AND "."pay_date = "."'$pay_date'") or die($conn->error);
 			$conn->close();
 
 			// display message
