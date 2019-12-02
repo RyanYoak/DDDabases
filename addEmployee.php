@@ -52,7 +52,12 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Gender</label>
-                    <input id="gender" name="gender" type="text" class="form-control col-sm-5" placeholder="">
+                    <select id="gender" name="gender">
+                        <option class="disabled">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                    </select>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Date of Birth*</label>
@@ -68,15 +73,15 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Address*</label>
-                    <input id="address" name="address" type="text" class="form-control col-sm-5" placeholder="" required>
+                    <input id="address" name="address" type="text" class="form-control col-sm-5" placeholder="Address" required>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Position*</label>
-                    <input id="position" name="position" type="text" class="form-control col-sm-5" placeholder="" required>
+                    <input id="position" name="position" type="text" class="form-control col-sm-5" placeholder="position" required>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Wage*</label>
-                    <input id="wage" name="wage" type="number" class="form-control col-sm-5" placeholder="" required>
+                    <input id="wage" name="wage" type="number" min="0" step="0.0000001" max="1000"class="form-control col-sm-5" placeholder="Wage per hour" required>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Hiring Date*</label>

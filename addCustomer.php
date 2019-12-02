@@ -53,7 +53,7 @@
             </div>
             <div class="form-group row">
                 <label class="col-sm-2">Phone Number*</label>
-                <input id="phone" name="phone" type="number" min="0" step="1" class="form-control col-sm-5" placeholder="number only" required>
+                <input id="phone" name="phone" type="number" min="0" minlength="10" maxlength="13" step="1" class="form-control col-sm-5" placeholder="Phone Number" required>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2">Address*</label>
