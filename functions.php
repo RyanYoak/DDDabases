@@ -482,4 +482,15 @@ function insertCustomer($conn){
 		}
 
 	}
+/* ==================================================== Logs ====================================================== */
+	function showAllLogs($conn){
+		$sql = "SELECT * FROM orders";
+		$result = $conn->query($sql);
+
+	}
+
+	function insertLogs($conn) {
+
+	}
+
 ?>

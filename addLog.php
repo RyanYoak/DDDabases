@@ -2,7 +2,7 @@
 <?php
     require_once('dbconnect.php');
     require_once('functions.php');
-    //insertSupplier($conn);
+    insertSupplier($conn);
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +28,30 @@
         </div>
         <?php endif ?>    
 	<body>
+    <div class="container">
+            <form action="addLog.php" method="POST">
+                <div class="form-group row">
+                    <label class="col-sm-2">Employee ID: </label>
+                    <select id="viewId" name="employee_id" style="background-color: white;">
+                        <?php showEmployeeID($conn); ?>
+                    </select>
+                    
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2">Date*</label>
+                    <input id="address" name="address" type="Date" class="form-control col-sm-5"  required>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2">Login Time*</label>
+                    <input id="address" name="address" type="Time" class="form-control col-sm-5"  required>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2">Logout Time*</label>
+                    <input id="address" name="address" type="Time" class="form-control col-sm-5" required>
+                </div>
+                <button id="insert" name="insert" class="btn btn-secondary" type="submit">Save</button>
 
+            </form>
     
     </body>
     <?php include("scripts.php") ?>

@@ -25,9 +25,23 @@
         <?php endif ?><br>
         
     <body>
-        <div class="container"><a class="btn btn-info " href="addLog.php?insert">New Log</a></div><br>
-        <!-- codes here -->
-
+        <div class="container"><a class="btn btn-info " href="addLog.php?insert">New Log</a></div><br> <br>
+        
+        <!-- Please Modified below  -->
+        <div class="container">
+            <table id="viewTable">
+                <thead class="table table-dark">
+                    <th scope="col">Product ID</th>
+                    <th scope="col">Supplier ID</th>
+                    <th scope="col">Supplier Name</th>
+                    <th scope="col">Product Description</th>
+                    <th scope="col">Actions</th>
+                </thead>
+                <tbody class="table table-striped">
+                    <?php showSupplies($conn); ?>                        
+                </tbody>
+            </table>
+        </div>
 
 
     </body>
