@@ -68,7 +68,7 @@
 				
 				<div class="form-group row">
 					<label class="col-sm-2">Paycheck Amount</label>
-					<input id="paycheck_amount" name="paycheck_amount" value="<?php echo $paycheck_amount; ?>" type="number" class="form-control col-sm-5" placeholder="0.00" required>
+					<input id="paycheck_amount" name="paycheck_amount" value="<?php echo $paycheck_amount; ?>" type="number" min="0" step="0.00001" class="form-control col-sm-5" required>
 				</div>
 
 				<div  align="center">

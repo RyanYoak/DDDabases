@@ -135,7 +135,9 @@
 		// Delete employee by employee_ID
 		if (isset($_GET["delete"])){
 			$id = $_GET["delete"];
+			$conn->query("DELETE FROM supplies WHERE supplier_id = $id") or die($conn->error);
 			$conn->query("DELETE FROM supplier WHERE supplier_id = $id") or die($conn->error);
+			$conn->query("DELETE FROM items WHERE product_id NOT IN (SELECT product_id FROM supplies);");
 			$conn->close();
 
 			// display message
@@ -158,11 +160,12 @@
 		}
 	}
 
-/* ============================= Items & Supplies ===============================	*/
+/* ============================================== Items ===================================================	*/
 	// Insert new item to items table
 	function insertItem($conn){
 		if (isset($_POST['insert'])){
 			// 1. Get supplier information
+			$supplier_id = $_POST['supplier_id'];
 			$name = $_POST['name'];
 			$industry = $_POST['industry'];
 			$phone = $_POST['phone'];
@@ -177,11 +180,11 @@
 			$description = $_POST['description'];
 
 			// 3. Prepare query for inserting supplier
-			$suppSQL = "INSERT INTO supplier "."(name, industry, phone, email, address, website) "."VALUES".
-			"('$name', '$industry', '$phone', '$email', '$address', '$website')";
+			$suppSQL = "INSERT INTO supplier "."(supplier_id, name, industry, phone, email, address, website) "."VALUES".
+			"('$supplier_id','$name', '$industry', '$phone', '$email', '$address', '$website')";
 			// 4. Prepare query for inserting product
-			$itemSQL = "INSERT INTO items "."(category, unit_price, quantity, description) "."VALUES".
-			"('$category', '$unit_price', '$quantity', '$description')";
+			$itemSQL = "INSERT INTO items "."(product_id, category, unit_price, quantity, description) "."VALUES".
+			"('$product_id','$category', '$unit_price', '$quantity', '$description')";
 			// 5. Prepare query for inserting product
 			$sql = "INSERT INTO supplies "."(product_id, supplier_id) "."VALUES"."('$product_id', '$supplier_id')";
 
@@ -192,11 +195,11 @@
 			/*	if not exist supplier or not exist item then (add supllier & item , execute b4) ---> add supplies
 					if exist supplies -> die("ERRRO: Existing Record, Cannot Insert, ")
 			 */
-			if (! $addSupplier && $addSupplies){
+			if ((! $addSupplier) && $addSupplies){
 				$_SESSION['message'] = "Insert supplies Sucessfully; \n Warning: supplier ID has been taken / the supplier exists";
 				$_SESSION['msg_type'] = "warning";
 			}
-			elseif (! $addItems && $addSupplies){
+			elseif ((! $addItem) && $addSupplies){
 				$_SESSION['message'] = "Insert supplies Sucessfully; \n Warning: item ID has been taken / the item exists";
 				$_SESSION['msg_type'] = "warning";
 			}
@@ -213,7 +216,44 @@
 		}
 
 	}
-	/* Show supplies information: product_id, supplier_id, supplier.name, description,  */
+
+	function showAllItems($conn){
+		$sql = "SELECT * FROM items";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				echo '<tr>';
+					echo "<td>" . $row["product_id"]. "</td>";
+					echo "<td>" . $row["category"]. "</td>";
+					echo "<td>" . $row["unit_price"]. "</td>";
+					echo "<td>" . $row["description"]. "</td>";
+					echo "<td>";
+						echo "<a href='editItem.php?edit=". $row["product_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
+						echo " <a href='items.php?delete=" . $row["product_id"] ."'class='btn btn-danger btn-sm'>Delete</a>";
+					echo "</td>";
+				echo '</tr>';
+			}
+		}
+		else{
+			echo "There is no supplies";
+		}
+
+		// delete supplies
+		if (isset($_GET["delete"])){
+			$product_id = $_GET["delete"];
+			// delete any supplier that's not in supplies list and delete supplies that has product_id = $product_id
+			$conn->query("DELETE FROM supplies WHERE product_id=$product_id;");
+			$conn->query("DELETE FROM supplier WHERE supplier_id NOT IN (SELECT supplier_id FROM supplies);");
+			$conn->query("DELETE FROM items WHERE product_id=$product_id") or die($conn->error);
+			
+			// Display message
+			$_SESSION['message'] = "Successlly Delete Supplies, Product ID: $product_id";
+			$_SESSION['msg_type'] = "success";
+			echo "<script> setTimeout(\"location.href = 'supplies.php';\", 3000);</script>";
+		}
+		$conn->close();
+	}
+//============================================= Supplies =========================================================================
 	function showSupplies($conn){
 		$sql = "SELECT supplies.product_id, supplies.supplier_id, supplier.name, items.description FROM supplies NATURAL JOIN  items NATURAL JOIN supplier";
 		$result = $conn->query($sql);
@@ -225,7 +265,7 @@
 					echo "<td>" . $row["name"]. "</td>";
 					echo "<td>" . $row["description"]. "</td>";
 					echo "<td>";
-						echo "<a href='supplies.php?edit=". $row["product_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
+						echo "<a href='editItem.php?edit=". $row["product_id"]. "' class='btn btn-info btn-sm'>Edit</a>";
 						echo " <a href='supplies.php?delete=" . $row["product_id"] . "&supplier=" . $row["supplier_id"] . "'class='btn btn-danger btn-sm'>Delete</a>";
 					echo "</td>";
 				echo '</tr>';
@@ -256,7 +296,6 @@
 			$product_id = $_POST["product_id"];
 			$supplier_id = $_POST["supplier_id"];
 			//insert rescord
-			$sql = "INSERT INTO supplies "."(product_id, supplier_id) "."VALUES"."('$product_id', '$supplier_id')";
 			$conn->query("INSERT INTO supplies (product_id, supplier_id) VALUES ('$product_id', '$supplier_id')") or die($conn->error);
 			//$result = mysqli_query($conn, $sql);
 			$_SESSION['message'] = "Insert Record Successlly";
@@ -276,9 +315,21 @@
 			}
 		}
 	}
+//======================================== Products (Finished-Goods) ==================================================
+	function showFinishedGoods($conn){ 
+		$sql = "SELECT * FROM items WHERE category='finished' GROUP BY description";
+		$result = mysqli_query($conn, $sql) or die($conn->error);
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				echo '<tr>';
+					echo "<td>" . $row["product_id"]. "</td>";
+					echo "<td>" . $row["unit_price"]. "</td>";
+					echo "<td>" . $row["description"]. "</td>";
+				echo '</tr>';
+			}
+		}
 
-	function showAllItems($conn){ //show item (not include supplier's information)
-		# code...
 	}
 
 

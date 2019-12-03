@@ -30,7 +30,7 @@
         <?php endif ?>    
 	<body>
   
-        <div a align="right"><a class="btn btn-danger" href="supplies.php">Back to View All Items</a></div>
+        <div a align="right"><a class="btn btn-danger" href="items.php">Back to View All Items</a></div>
         <div class="container">
             <b><h3 >Item Information</h3><br>
             <form action="addItems.php" method="POST">
@@ -40,7 +40,12 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Category*</label>
-                    <input id="category" name="category" type="text" class="form-control col-sm-5" placeholder="Supplier Name" required>
+                    <select id="category" name="category" required>
+                        <option class="disabled">Select</option>
+                        <option value="finished">Finished Goods</option>
+                        <option value="sub-product">Sub-Product</option>
+                        <option value="Others">Others</option>
+                    </select>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Unit Price</label>
