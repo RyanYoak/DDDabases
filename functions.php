@@ -546,9 +546,8 @@ function insertCustomer($conn){
 						echo "<td>" . $row["logout_time"]. "</td>";
 						echo "<td>" . $row["log_date"]. "</td>";
 						echo "<td>";
-							echo " <a href='editLog.php?edit=". $row["employee_id"] . "&login_time=" . $row["login_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-info btn-sm'>Edit</a>";
-							echo " <a href='logs.php?delete=". $row["employee_id"] . "&login_time=" . $row["login_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-danger btn-sm'>Delete</a>";
-						echo "</td>";
+							echo " <a href='editLog.php?edit=". $row["employee_id"] . "&login_time=" . $row["login_time"] . "&logout_time=" . $row["logout_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-info btn-sm'>Edit</a>";
+							echo " <a href='logs.php?delete=". $row["employee_id"] . "&login_time=" . $row["login_time"] . "&logout_time=" . $row["logout_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-danger btn-sm'>Delete</a>";						echo "</td>";
 					echo '</tr>';
 				}
 		}
@@ -559,7 +558,7 @@ function insertCustomer($conn){
 			$logout_time = $_GET["logout_time"];
 			//Delete log
 
-			$conn->query("DELETE FROM logs"."WHERE "."employee_id = "."'$employee_id' "."AND "."log_date = "."'$log_date' "." AND "." login_time = "." '$login_time' "." AND "." logout_time = "." '$logout_time'") or die($conn->error);
+			$conn->query("DELETE FROM logs "."WHERE "."employee_id = "."'$employee_id' "."AND "."log_date = "."'$log_date' "." AND "." login_time = "." '$login_time' "." AND "." logout_time = "." '$logout_time'") or die($conn->error);
 			$conn->close();
 
 			//display message
