@@ -27,6 +27,7 @@
         </div>
         <?php endif ?>
 	<body>
+    <div a align="right"><a class="btn btn-danger" href="logs.php">View All Logs</a></div><br>
     <div class="container">
             <form action="addLog.php" method="POST">
                 <div class="form-group row">
@@ -42,11 +43,11 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Login Time*</label>
-                    <input id="login_time" name="login_time" type="Time" class="form-control col-sm-5"  required>
+                    <input id="login_time" name="login_time" type="Time" step="1"  min="00:00:00" max="24:00:00" class="form-control col-sm-5"  required>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2">Logout Time*</label>
-                    <input id="logout_time" name="logout_time" type="Time" class="form-control col-sm-5" required>
+                    <input id="logout_time" name="logout_time" type="Time" step="1"  min="00:00:00" max="24:00:00" class="form-control col-sm-5" required>
                 </div>
                 <button id="insert" name="insert" class="btn btn-secondary" type="submit">Save</button>
 
