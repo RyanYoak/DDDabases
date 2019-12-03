@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once('functions.php');
     require_once('dbconnect.php');
 ?>
@@ -17,28 +17,26 @@
             <!-- Display Message after edit, add and delete -->
     <?php if(isset($_SESSION['message'])): ?>
     <div class="alert alert-<?=$_SESSION['msg_type']?>">
-        <?php 
+        <?php
             echo $_SESSION['message'];
             unset($_SESSION['message']);
         ?>
     </div>
         <?php endif ?><br>
-        
+
     <body>
         <div class="container"><a class="btn btn-info " href="addLog.php?insert">New Log</a></div><br> <br>
-        
+
         <!-- Please Modified below  -->
         <div class="container">
             <table id="viewTable">
                 <thead class="table table-dark">
-                    <th scope="col">Product ID</th>
-                    <th scope="col">Supplier ID</th>
-                    <th scope="col">Supplier Name</th>
-                    <th scope="col">Product Description</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col">Login time</th>
+                    <th scope="col">Logout time</th>
+                    <th scope="col">Login Date</th>
                 </thead>
                 <tbody class="table table-striped">
-                    <?php showSupplies($conn); ?>                        
+                    <?php showAllLogs($conn); ?>
                 </tbody>
             </table>
         </div>

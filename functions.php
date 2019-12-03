@@ -484,13 +484,44 @@ function insertCustomer($conn){
 	}
 /* ==================================================== Logs ====================================================== */
 	function showAllLogs($conn){
-		$sql = "SELECT * FROM orders";
+		$sql = "SELECT * FROM logs";
 		$result = $conn->query($sql);
-
+		if($result->num_rows > 0) {
+				//view all Logs
+				while ($row = $result->fetch_assoc()){
+					echo '<tr>';
+						echo "<td>" . $row["login_time"]. "</td>";
+						echo "<td>" . $row["logout_time"]. "</td>";
+						echo "<td>" . $row["log_date"]. "</td>";
+						echo "<td>";
+							echo " <a href='editLog.php?edit=". $row["logs"] . "&login_time=" . $row["login_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-info btn-sm'>Edit</a>";
+							echo " <a href='logs.php?delete=". $row["logs"] . "&login_time=" . $row["login_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-danger btn-sm'>Delete</a>";
+						echo "</td>";
+					echo '</tr>';
+				}
+		}
 	}
 
 	function insertLogs($conn) {
+		if (isset($_POST['insert'])){
+			$log_date = $_POST['log_date'];
+			$login_time = $_POST['login_time'];
+			$logout_time = $_POST['logout_time'];
+			//get logs
+			$sql = "INSERT INTO logs "."( log_date, login_time, logout_time,) "."VALUES".
+			"('$log_date', '$login_time', '$logout_time')";
+			//save to database
+			$retval = mysqli_query($conn, $sql);
 
+
+			if (! $retval) {
+				die('Could not enter log time: ' . mysqli_error($conn));
+			}
+			//display message if submit successfull
+			$_SESSION['message'] = "Insert Record Successlly. Login time:  $login_time Logout time:  $logout_time Log Date: $log_date";
+			$_SESSION['msg_type'] = "success";
+			echo "<script> setTimeout(\"location.href = 'addLog.php':\", 3000)</script>";
+		}
 	}
 
 ?>
