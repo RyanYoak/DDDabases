@@ -245,7 +245,7 @@
 			$conn->query("DELETE FROM supplies WHERE product_id=$product_id;");
 			$conn->query("DELETE FROM supplier WHERE supplier_id NOT IN (SELECT supplier_id FROM supplies);");
 			$conn->query("DELETE FROM items WHERE product_id=$product_id") or die($conn->error);
-			
+
 			// Display message
 			$_SESSION['message'] = "Successlly Delete Supplies, Product ID: $product_id";
 			$_SESSION['msg_type'] = "success";
@@ -316,7 +316,7 @@
 		}
 	}
 //======================================== Products (Finished-Goods) ==================================================
-	function showFinishedGoods($conn){ 
+	function showFinishedGoods($conn){
 		$sql = "SELECT * FROM items WHERE category='finished' GROUP BY description";
 		$result = mysqli_query($conn, $sql) or die($conn->error);
 		$result = $conn->query($sql);
@@ -555,12 +555,13 @@ function insertCustomer($conn){
 
 	function insertLogs($conn) {
 		if (isset($_POST['insert'])){
+			$employee_id = $_POST['employee_id'];
 			$log_date = $_POST['log_date'];
 			$login_time = $_POST['login_time'];
 			$logout_time = $_POST['logout_time'];
 			//get logs
-			$sql = "INSERT INTO logs "."( log_date, login_time, logout_time,) "."VALUES".
-			"('$log_date', '$login_time', '$logout_time')";
+			$sql = "INSERT INTO logs "."( employee_id, log_date, login_time, logout_time) "."VALUES".
+			"('$employee_id','$log_date', '$login_time', '$logout_time');";
 			//save to database
 			$retval = mysqli_query($conn, $sql);
 
