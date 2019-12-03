@@ -546,7 +546,7 @@ function insertCustomer($conn){
 						echo "<td>" . $row["logout_time"]. "</td>";
 						echo "<td>" . $row["log_date"]. "</td>";
 						echo "<td>";
-							echo " <a href='editLog.php?edit=". $row["employee_id"] . "&login_time=" . $row["login_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-info btn-sm'>Edit</a>";
+							echo " <a href='editLog.php?edit=". $row["employee_id"] . "&login_time=" . $row["login_time"] . "&logout_time=" . $row["logout_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-info btn-sm'>Edit</a>";
 							echo " <a href='logs.php?delete=". $row["employee_id"] . "&login_time=" . $row["login_time"] . "&logout_time=" . $row["logout_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-danger btn-sm'>Delete</a>";						echo "</td>";
 					echo '</tr>';
 				}

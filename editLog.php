@@ -1,27 +1,17 @@
-<?php>
-    require_once("dbconnet.php");
+<?php
+    require_once("dbconnect.php");
     require_once("functions.php");
 
     //editlog($conn)
     if(isset($_GET["edit"])){
-      $id = $_GET["edit"];
+      $employee_id = $_GET["edit"];
       $log_date = $_GET["log_date"];
       $login_time = $_GET["login_time"];
       $logout_time = $_GET["logout_time"];
-      $empArray = $conn->query($sql) or die($conn->error);
-      $row = $empArray->fetch_array();
-      $employee_id = $row['employee_id'];
-      $log_date = $row['log_date'];
-      $login_time = $row['login_time'];
-      $logout_time = $row['logout_time'];
     }
 
     if(isset($_POST["update"])){
-      $oemployee_id = $employee_id;
-      $olog_date = $log_date;
-      $ologin_time = $login_time;
-      $ologout_time = $logout_time;
-      $employee_id = $_POST['employee_id']
+      $employee_id = $_POST['employee_id'];
       $login_time = $_POST['login_time'];
       $logout_time = $_POST['logout_time'];
       $log_date - $_POST['log_date'];
@@ -58,9 +48,7 @@
 		<span class="navbar-brand">Editing Login <?php echo "for ", $employee_id, " on ", $log_date;?></span>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
             </div>
-            <?php include("navigationMenu.php");  ?><br>
-
-		<br>
+            <?php include("navigationMenu.php");  ?><br><br>
 
 		<!-- Display Edit form-->
 		<div class="container">
