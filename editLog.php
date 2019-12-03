@@ -49,9 +49,7 @@
 		<span class="navbar-brand">Editing Login <?php echo "for ", $employee_id, " on ", $log_date;?></span>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
             </div>
-            <?php include("navigationMenu.php");  ?><br>
-
-		<br>
+            <?php include("navigationMenu.php");  ?><br><br>
 
 		<!-- Display Edit form-->
 		<div class="container">
