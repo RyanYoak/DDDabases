@@ -31,9 +31,11 @@
         <div class="container">
             <table id="viewTable">
                 <thead class="table table-dark">
+                    <th scope="col">Employee ID</th>
                     <th scope="col">Login time</th>
                     <th scope="col">Logout time</th>
                     <th scope="col">Login Date</th>
+                    <th scope="col">Actions</th>
                 </thead>
                 <tbody class="table table-striped">
                     <?php showAllLogs($conn); ?>
