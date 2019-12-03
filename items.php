@@ -34,13 +34,13 @@
           <table id="viewTable">
               <thead class="table table-dark">
                   <th scope="col">Product ID</th>
-                  <th scope="col">Supplier ID</th>
-                  <th scope="col">Name</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Unit Price</th>
                   <th scope="col">Description</th>
                   <th scope="col">Actions</th>
               </thead>
               <tbody class="table table-striped">
-                  <?php  showsupplies($conn); ?>
+                  <?php  showAllItems($conn); ?>
               </tbody>
           </table>
       </div>
