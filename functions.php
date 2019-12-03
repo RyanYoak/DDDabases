@@ -559,7 +559,7 @@ function insertCustomer($conn){
 			$logout_time = $_GET["logout_time"];
 			//Delete log
 
-			$conn->query("DELETE FROM logs"."WHERE "."employee_id = "."'$employee_id' "."AND "."log_date = "."'$log_date' "." AND "." login_time = "." '$login_time' "." AND "." logout_time = "." '$logout_time'") or die($conn->error);
+			$conn->query("DELETE FROM logs "."WHERE "."employee_id = "."'$employee_id' "."AND "."log_date = "."'$log_date' "." AND "." login_time = "." '$login_time' "." AND "." logout_time = "." '$logout_time'") or die($conn->error);
 			$conn->close();
 
 			//display message
