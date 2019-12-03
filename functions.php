@@ -245,7 +245,7 @@
 			$conn->query("DELETE FROM supplies WHERE product_id=$product_id;");
 			$conn->query("DELETE FROM supplier WHERE supplier_id NOT IN (SELECT supplier_id FROM supplies);");
 			$conn->query("DELETE FROM items WHERE product_id=$product_id") or die($conn->error);
-			
+
 			// Display message
 			$_SESSION['message'] = "Successlly Delete Supplies, Product ID: $product_id";
 			$_SESSION['msg_type'] = "success";
@@ -316,7 +316,7 @@
 		}
 	}
 //======================================== Products (Finished-Goods) ==================================================
-	function showFinishedGoods($conn){ 
+	function showFinishedGoods($conn){
 		$sql = "SELECT * FROM items WHERE category='finished' GROUP BY description";
 		$result = mysqli_query($conn, $sql) or die($conn->error);
 		$result = $conn->query($sql);
@@ -541,26 +541,43 @@ function insertCustomer($conn){
 				//view all Logs
 				while ($row = $result->fetch_assoc()){
 					echo '<tr>';
+						echo "<td>" . $row["employee_id"]. "</td>";
 						echo "<td>" . $row["login_time"]. "</td>";
 						echo "<td>" . $row["logout_time"]. "</td>";
 						echo "<td>" . $row["log_date"]. "</td>";
 						echo "<td>";
-							echo " <a href='editLog.php?edit=". $row["logs"] . "&login_time=" . $row["login_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-info btn-sm'>Edit</a>";
-							echo " <a href='logs.php?delete=". $row["logs"] . "&login_time=" . $row["login_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-danger btn-sm'>Delete</a>";
+							echo " <a href='editLog.php?edit=". $row["employee_id"] . "&login_time=" . $row["login_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-info btn-sm'>Edit</a>";
+							echo " <a href='logs.php?delete=". $row["employee_id"] . "&login_time=" . $row["login_time"] . "&log_date=" . $row["log_date"] ."' class='btn btn-danger btn-sm'>Delete</a>";
 						echo "</td>";
 					echo '</tr>';
 				}
+		}
+		if (isset($_GET["delete"])){
+			$employee_id = $_GET["delete"];
+			$log_date = $_GET["log_date"];
+			$login_time = $_GET["login_time"];
+			$logout_time = $_GET["logout_time"];
+			//Delete log
+
+			$conn->query("DELETE FROM logs"."WHERE "."employee_id = "."'$employee_id' "."AND "."log_date = "."'$log_date' "." AND "." login_time = "." '$login_time' "." AND "." logout_time = "." '$logout_time'") or die($conn->error);
+			$conn->close();
+
+			//display message
+			$_SESSION['message'] = "Successlly deleted login that has ID: $employee_id, Date: $log_date, Login Time: $login_time, Logout Time: $logout_time";
+			$_SESSION['msg_type'] = "success";
+			echo "<script> setTimeout(\"location.href = 'logs.php';\", 2);</script>";
 		}
 	}
 
 	function insertLogs($conn) {
 		if (isset($_POST['insert'])){
+			$employee_id = $_POST['employee_id'];
 			$log_date = $_POST['log_date'];
 			$login_time = $_POST['login_time'];
 			$logout_time = $_POST['logout_time'];
 			//get logs
-			$sql = "INSERT INTO logs "."( log_date, login_time, logout_time,) "."VALUES".
-			"('$log_date', '$login_time', '$logout_time')";
+			$sql = "INSERT INTO logs "."( employee_id, log_date, login_time, logout_time) "."VALUES".
+			"('$employee_id','$log_date', '$login_time', '$logout_time');";
 			//save to database
 			$retval = mysqli_query($conn, $sql);
 
