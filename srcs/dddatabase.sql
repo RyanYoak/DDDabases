@@ -27,7 +27,7 @@ CREATE TABLE if NOT EXISTS payroll (
 	pay_date        date,
 	paycheck_amount	numeric(9,2) NOT NULL,
 	foreign key (employee_id) references employee(employee_id),
-	CONSTRAINT uni_payroll PRIMARY KEY (employee_id, pay_date)
+	CONSTRAINT uni_payroll UNIQUE (employee_id, pay_date)
 );
 
 /* table 3 */
@@ -36,8 +36,10 @@ CREATE TABLE IF NOT EXISTS logs(
   log_date        date,
   login_time      time,
   logout_time     time,
-	primary key (employee_id, log_date, login_time, logout_time),
-  foreign key(employee_id) references employee(employee_id)
+  foreign key(employee_id) references employee(employee_id),
+  CONSTRAINT uni_login UNIQUE (employee_id, log_date, login_time),
+  CONSTRAINT uni_logout UNIQUE (employee_id, log_date, logout_time),
+  CONSTRAINT uni_log UNIQUE (employee_id, log_date, login_time, logout_time)
 );
 
 /* ======================== Customer - Orders - Items - Supplies - Supplier ======================== */
