@@ -22,8 +22,17 @@
         <!-- List of offered Products -->
 
         <div class="container">
-                <b><h1 style="color: gray;">Comming Soon!</h1></b>
-        </div>
+          <table id="viewTable">
+              <thead class="table table-dark">
+                  <th scope="col">Product ID</th>
+                  <th scope="col">Unit Price</th>
+                  <th scope="col">Description</th>
+              </thead>
+              <tbody class="table table-striped">
+                  <?php  showFinishedGoods($conn); ?>
+              </tbody>
+          </table>
+      </div>
 
     </body>
     <?php include("scripts.php"); ?>
