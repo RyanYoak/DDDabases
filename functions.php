@@ -92,7 +92,7 @@
 	}
 
 	function showEmployeeID($conn) {
-		$sql = "SELECT employee_id FROM employee";
+		$sql = "SELECT employee_id FROM employee ORDER BY employee_id";
 		$result = mysqli_query($conn, $sql) or die($conn->error);
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
@@ -150,7 +150,7 @@
 
 	// Show supplier ID
 	function showSupplierID($conn) {
-		$sql = "SELECT supplier_id FROM supplier";
+		$sql = "SELECT supplier_id FROM supplier order by supplier_id";
 		$result = mysqli_query($conn, $sql) or die($conn->error);
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
@@ -306,7 +306,7 @@
 
 	// show product ID
 	function showProductID($conn) {
-		$sql = "SELECT product_id FROM items";
+		$sql = "SELECT product_id FROM items order by product_id";
 		$result = mysqli_query($conn, $sql) or die($conn->error);
 		if ($result->num_rows > 0) {
 			while($row = $result->fetch_assoc()) {
