@@ -17,7 +17,7 @@
             </button>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="Logs.php">Logs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="logs.php">Logs</a></li>
                 </ul>
             <div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
             </div>
@@ -50,7 +50,7 @@
                     <th scope="col">Actions</th>
                 </thead>
                 <tbody class="table table-striped">
-                    <?php  showEmployee($conn); ?>                        
+                    <?php  showEmployee($conn); ?>
                 </tbody>
             </table>
         </div>
