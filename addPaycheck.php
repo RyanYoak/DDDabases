@@ -19,15 +19,15 @@
 			<span class="navbar-brand">Add New Paycheck</span>
 			<div class="collapse navbar-collapse justify-content-stretch" id="navbarCollapse">
 				<ul class="navbar-nav mr-auto"></ul>
-		<?php include("navigationMenu.php");  ?><br><br> 
+		<?php include("navigationMenu.php");  ?><br><br>
 		<?php if(isset($_SESSION['message'])): ?>
 	<div class="alert alert-<?=$_SESSION['msg_type']?>">
-	
-	<?php 
+
+	<?php
 		echo $_SESSION['message'];
 		unset($_SESSION['message']);
 	?>
-        
+
 	</div>
 	<?php endif ?>
 	<body>
@@ -37,7 +37,7 @@
 		<b><h3 >Paycheck Information</h3><br>
 		<form action="addPaycheck.php" method="POST">
 			<div class="form-group row">
-				<label style="width: 120px">Employee ID*: </label>
+				<label class="col-sm-2">Employee ID*: </label>
                     <select id="fade" name="employee_id" style="background-color: white;" required>
                         <?php showEmployeeID($conn); ?>
                     </select>
@@ -53,7 +53,7 @@
 				<input id="paycheck_amount" name="paycheck_amount" type="number" min="0" step="0.001" class="form-control col-sm-5" placeholder="Amount" required>
 			</div>
 
-			<button name="insert" type="submit" class="btn btn-success">Insert Record</button>  
+			<button name="insert" type="submit" class="btn btn-success">Insert Record</button>
 		</form>
 	</div>
 	</body>
